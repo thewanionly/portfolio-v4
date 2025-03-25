@@ -1,9 +1,19 @@
 @import 'tailwindcss';
 
+:root {
+  --background: hsl(0, 0%, 100%);
+}
+
+.dark {
+  --background: hsl(210, 15%, 6%);
+}
+
 @theme {
   --color-primary: hsl(32, 32%, 78%);
   --color-grey-darkest: hsl(0, 0%, 8%);
   --color-grey-dark: hsl(0, 0%, 14%);
   --color-grey-light: hsl(0, 0%, 85%);
   --color-white: hsl(0, 0%, 100%);
+
+  --color-background: var(--background);
 }
