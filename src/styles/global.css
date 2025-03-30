@@ -73,6 +73,7 @@
 }
 
 @theme {
+  /* Colors */
   --color-primary: hsl(32, 32%, 78%);
   --color-grey-darkest: hsl(0, 0%, 8%);
   --color-grey-dark: hsl(0, 0%, 14%);
@@ -80,6 +81,9 @@
   --color-white: hsl(0, 0%, 100%);
 
   --color-background: var(--background);
+
+  /* Typography */
+  --font-sans: 'Plus Jakarta Sans Variable', sans-serif;
 }
 
 @theme inline {
