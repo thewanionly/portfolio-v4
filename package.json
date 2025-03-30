@@ -16,6 +16,7 @@
   "dependencies": {
     "@astrojs/react": "^4.2.2",
     "@fontsource-variable/plus-jakarta-sans": "^5.2.5",
+    "@radix-ui/react-slot": "^1.1.2",
     "@tailwindcss/vite": "^4.0.15",
     "@types/react": "^19.0.12",
     "@types/react-dom": "^19.0.4",
