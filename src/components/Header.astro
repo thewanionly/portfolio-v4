@@ -1,0 +1,23 @@
+---
+import { Languages, Menu, Moon } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+---
+
+<header class="sticky top-0 flex justify-between items-center p-4 bg-background">
+  <div>EP</div>
+  <div class="flex gap-2">
+    <Button variant="ghost" size="icon">
+      <Moon />
+      <!-- <Sun /> -->
+      <span class="sr-only">Change theme</span>
+    </Button>
+    <Button variant="ghost" size="icon">
+      <Languages />
+      <span class="sr-only">Change language</span>
+    </Button>
+    <Button variant="ghost" size="icon">
+      <Menu />
+      <span class="sr-only">Open menu</span>
+    </Button>
+  </div>
+</header>

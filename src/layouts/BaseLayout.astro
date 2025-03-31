@@ -1,7 +1,9 @@
 ---
 // Supports weights 200-800
 import '@fontsource-variable/plus-jakarta-sans';
-import '../styles/global.css';
+
+import Header from '@/components/Header.astro';
+import '@/styles/global.css';
 ---
 
 <!doctype html>
@@ -14,15 +16,7 @@ import '../styles/global.css';
     <title>Elloani Ross Pitogo | Frontend Software Engineer</title>
   </head>
   <body>
+    <Header />
     <slot />
   </body>
 </html>
-
-<style>
-  html,
-  body {
-    margin: 0;
-    width: 100%;
-    height: 100%;
-  }
-</style>
