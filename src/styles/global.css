@@ -86,6 +86,9 @@
 
   /* Typography */
   --font-sans: 'Plus Jakarta Sans Variable', sans-serif;
+
+  /* Others */
+  --radius-blob-shape: 60% 40% 30% 70% / 60% 30% 70% 40%;
 }
 
 @theme inline {
