@@ -1,10 +1,15 @@
 ---
 import { Languages, Menu, Moon } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { cn } from '@/lib/utils';
 ---
 
 <header
-  class="sticky top-0 flex justify-between items-center p-6 md:p-9 bg-background gap-4 lg:px-16 md:px-10 max-w-6xl mx-auto"
+  class={cn(
+    'sticky top-0 p-6 md:p-9 lg:px-16 md:px-10 max-w-6xl mx-auto',
+    'backdrop-blur-sm',
+    'flex justify-between items-center gap-4'
+  )}
 >
   <div>
     <a href="/">
