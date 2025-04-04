@@ -1,0 +1,19 @@
+---
+import { Button } from '@/components/ui/button';
+import { ArrowDownToLine } from 'lucide-react';
+---
+
+<div class="w-full flex flex-col items-center md:items-start">
+  <div class="w-full flex gap-4 flex-wrap justify-center md:justify-start mb-4">
+    <Button className="flex-1 md:text-base max-w-[10rem] md:h-10 md:px-6 md:has-[>svg]:px-4"
+      >View My Work</Button
+    >
+    <Button
+      className="flex-1 max-w-[10rem] md:text-base md:h-10 md:px-6 md:has-[>svg]:px-4"
+      variant="outline">Contact Me</Button
+    >
+  </div>
+  <Button variant="ghost" className="md:text-base w-fit md:h-10 md:px-6 md:has-[>svg]:px-4"
+    >Download Resume <ArrowDownToLine className="size-3.5" /></Button
+  >
+</div>
