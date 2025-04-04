@@ -7,10 +7,12 @@ import { cn } from '@/lib/utils';
 const { class: className } = Astro.props;
 ---
 
-<Image
-  class={cn('rounded-blob-shape w-[55%] min-w-[10rem] aspect-square object-cover', className)}
-  src={myImage}
-  alt="Elloani Ross Pitogo wearing beige long sleeve, sling bag, and watch with hands together placed in a table"
-  loading="eager"
-  decoding="auto"
-/>
+<div class={cn('rounded-blob-shape w-[55%] min-w-[10rem] aspect-square', className)}>
+  <Image
+    class="rounded-blob-shape w-full aspect-square object-cover"
+    src={myImage}
+    alt="Elloani Ross Pitogo wearing beige long sleeve, sling bag, and watch with hands together placed in a table"
+    loading="eager"
+    decoding="auto"
+  />
+</div>
