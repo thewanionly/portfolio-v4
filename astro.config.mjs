@@ -7,6 +7,8 @@ import react from '@astrojs/react';
 
 import icon from 'astro-icon';
 
+import vercel from '@astrojs/vercel';
+
 // https://astro.build/config
 export default defineConfig({
   vite: {
@@ -18,4 +20,6 @@ export default defineConfig({
       iconDir: 'src/assets/icons',
     }),
   ],
+  output: 'server',
+  adapter: vercel(),
 });
