@@ -13,7 +13,10 @@ import CTAButtons from './CTAButtons.astro';
   )}
 >
   <div
-    class="flex flex-col items-center text-center md:items-start md:text-left md:w-[70%] bg-no-repeat bg-center bg-contain bg-[url(/src/assets/hero-section-bg-img.svg)] md:bg-left"
+    class={cn(
+      'flex flex-col items-center text-center md:items-start md:text-left md:w-[70%]',
+      'md:bg-[url(/src/assets/wave-line.svg)] md:bg-contain md:bg-no-repeat md:bg-left'
+    )}
   >
     <h1
       class="text-foreground text-4xl leading-[1.25] font-bold md:text-5xl lg:text-7xl text-balance mb-4 md:mb-2"
@@ -25,7 +28,11 @@ import CTAButtons from './CTAButtons.astro';
     >
       You can call me <span class="font-bold text-brand">Wani</span>!
     </p>
-    <MyImage class="md:hidden max-w-[15rem] mb-6" />
+    <div
+      class="md:hidden w-full bg-[url(/src/assets/wave-line.svg)] bg-contain bg-no-repeat bg-center"
+    >
+      <MyImage class="max-w-[15rem] mx-auto mb-6" />
+    </div>
     <Socials class="md:hidden mb-7" />
     <p class="body-text mb-10 lg:mb-12">
       I'm a Frontend Software Engineer with over 6 years of experience. I'm currently based in The
