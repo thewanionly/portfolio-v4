@@ -14,16 +14,15 @@ import { cn } from '@/lib/utils';
     'flex justify-between items-center gap-4'
   )}
 >
-  <div>
-    <a href="/">
-      <Image
-        src={logo}
-        alt="Elloani Ross's personal portfolio logo"
-        loading="eager"
-        decoding="auto"
-      />
-    </a>
-  </div>
+  <a href="/" class="shrink-0">
+    <Image
+      src={logo}
+      alt="Elloani Ross's personal portfolio logo"
+      loading="eager"
+      decoding="auto"
+    />
+  </a>
+
   <div class="flex gap-4 md:gap-8">
     <Button variant="ghost" size="icon">
       <Moon className="size-5 md:size-6" />
