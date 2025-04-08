@@ -1,5 +1,7 @@
 ---
+import { Image } from 'astro:assets';
 
+import swoop from '@/assets/swoop.svg';
 ---
 
 <section id="about" class="scroll-mt-10 md:scroll-mt-15 lg:scroll-mt-20">
@@ -31,4 +33,5 @@
       mobile development, back-end development among others.
     </p>
   </div>
+  <Image class="-mb-0.25" src={swoop} alt="" loading="eager" decoding="auto" />
 </section>
