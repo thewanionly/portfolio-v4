@@ -1,8 +1,6 @@
 ---
-import { Image } from 'astro:assets';
-
-import logo from '@/assets/logo/ep-logo-dark.svg';
 import Socials from '../Socials.astro';
+import Logo from '../Logo.astro';
 
 const currentYear = new Date().getFullYear();
 ---
@@ -10,14 +8,7 @@ const currentYear = new Date().getFullYear();
 <footer class="section-wrapper bg-background-secondary py-7.5 flex flex-col items-center">
   <!-- Decorative divider -->
   <div class="h-px bg-foreground mb-10 w-full" aria-hidden="true"></div>
-  <a href="/" class="mb-7">
-    <Image
-      src={logo}
-      alt="Elloani Ross's personal portfolio logo"
-      loading="eager"
-      decoding="auto"
-    />
-  </a>
+  <Logo class="mb-7" />
   <Socials class="mb-12.5" />
   <p class="body-text text-xs text-center md:text-start md:mx-0">
     © {currentYear} Elloani Ross Pitogo. All rights reserved.

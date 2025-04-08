@@ -1,10 +1,9 @@
 ---
-import { Image } from 'astro:assets';
 import { Languages, Menu, Moon } from 'lucide-react';
 
-import logo from '@/assets/logo/ep-logo-dark.svg';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
+import Logo from '../Logo.astro';
 ---
 
 <header
@@ -14,15 +13,7 @@ import { cn } from '@/lib/utils';
     'flex justify-between items-center gap-4'
   )}
 >
-  <a href="/" class="shrink-0">
-    <Image
-      src={logo}
-      alt="Elloani Ross's personal portfolio logo"
-      loading="eager"
-      decoding="auto"
-    />
-  </a>
-
+  <Logo class="shrink-0" />
   <div class="flex gap-4 md:gap-8">
     <Button variant="ghost" size="icon">
       <Moon className="size-5 md:size-6" />
