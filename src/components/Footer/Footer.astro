@@ -1,16 +1,38 @@
 ---
 import Socials from '../Socials.astro';
 import Logo from '../Logo.astro';
+import { cn } from '@/lib/utils';
 
 const currentYear = new Date().getFullYear();
 ---
 
-<footer class="section-wrapper bg-background-secondary py-7.5 flex flex-col items-center">
-  <!-- Decorative divider -->
-  <div class="h-px bg-foreground mb-10 w-full" aria-hidden="true"></div>
-  <Logo class="mb-7" />
-  <Socials class="mb-12.5" />
-  <p class="body-text text-xs text-center md:text-start md:mx-0">
-    © {currentYear} Elloani Ross Pitogo. All rights reserved.
-  </p>
+<footer class="bg-background-secondary">
+  <div class={cn('section-wrapper')}>
+    <!-- Decorative divider -->
+    <div class="h-px bg-foreground w-full" aria-hidden="true"></div>
+    <div
+      class={cn(
+        'grid grid-cols-1 place-items-center pt-12.5 pb-7.5 md:py-15.5',
+        'md:grid-cols-[auto_1fr] md:gap-y-14'
+      )}
+    >
+      <Logo class="mb-7 md:justify-self-start md:mb-0" />
+      <Socials
+        class={cn(
+          'mb-12.5 ',
+          'md:justify-self-start md:mb-0',
+          'md:col-start-1 md:col-end-2 md:row-start-2 md:row-end-3'
+        )}
+      />
+      <p
+        class={cn(
+          'body-text text-xs text-center',
+          'md:mx-0 md:justify-self-end md:text-right',
+          'md:col-start-2 md:col-end-3 md:row-start-2 md:row-end-3'
+        )}
+      >
+        © {currentYear} Elloani Ross Pitogo. All rights reserved.
+      </p>
+    </div>
+  </div>
 </footer>
