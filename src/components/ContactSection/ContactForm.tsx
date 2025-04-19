@@ -3,12 +3,14 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 
 import { Button } from '@/components/ui/button';
-import { Form, FormControl, FormField, FormItem, FormMessage } from '@/components/ui/form';
+import { Form, FormControl, FormField, FormItem } from '@/components/ui/form';
 import { cn } from '@/lib/utils';
 import { InputWithLabel } from '../InputWithLabel';
 
 const formSchema = z.object({
-  name: z.string().min(2).max(50),
+  name: z.string(),
+  email: z.string(), // TODO: add email validation
+  subject: z.string(),
 });
 
 type ContactFormProps = { className?: string };
@@ -18,6 +20,8 @@ export const ContactForm = ({ className }: ContactFormProps) => {
     resolver: zodResolver(formSchema),
     defaultValues: {
       name: '',
+      email: '',
+      subject: '',
     },
   });
 
@@ -41,7 +45,39 @@ export const ContactForm = ({ className }: ContactFormProps) => {
               <FormControl>
                 <InputWithLabel label="Name" id="name" placeholder="John Doe" {...field} />
               </FormControl>
-              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="email"
+          render={({ field }) => (
+            <FormItem>
+              <FormControl>
+                <InputWithLabel
+                  label="Email"
+                  id="email"
+                  placeholder="johndoe@example.com"
+                  {...field}
+                />
+              </FormControl>
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="subject"
+          render={({ field }) => (
+            <FormItem>
+              <FormControl>
+                <InputWithLabel
+                  label="Subject"
+                  id="subject"
+                  type="subject"
+                  placeholder="Job Opportunity"
+                  {...field}
+                />
+              </FormControl>
             </FormItem>
           )}
         />
