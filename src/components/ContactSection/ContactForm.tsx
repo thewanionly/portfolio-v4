@@ -6,11 +6,13 @@ import { Button } from '@/components/ui/button';
 import { Form, FormControl, FormField, FormItem } from '@/components/ui/form';
 import { cn } from '@/lib/utils';
 import { InputWithLabel } from '../InputWithLabel';
+import { TextAreaWithLabel } from '../TextAreaWithLabel';
 
 const formSchema = z.object({
-  name: z.string(),
-  email: z.string(), // TODO: add email validation
-  subject: z.string(),
+  name: z.string().min(1, 'Name is required'),
+  email: z.string().email('Invalid email address'),
+  subject: z.string().min(1, 'Subject is required'),
+  message: z.string().min(1, 'Message is required'),
 });
 
 type ContactFormProps = { className?: string };
@@ -22,6 +24,7 @@ export const ContactForm = ({ className }: ContactFormProps) => {
       name: '',
       email: '',
       subject: '',
+      message: '',
     },
   });
 
@@ -75,6 +78,24 @@ export const ContactForm = ({ className }: ContactFormProps) => {
                   id="subject"
                   type="subject"
                   placeholder="Job Opportunity"
+                  {...field}
+                />
+              </FormControl>
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="message"
+          render={({ field }) => (
+            <FormItem>
+              <FormControl>
+                <TextAreaWithLabel
+                  label="Message"
+                  id="message"
+                  type="message"
+                  placeholder="Hello. I am looking for a Software Engineer."
+                  rows={4}
                   {...field}
                 />
               </FormControl>
