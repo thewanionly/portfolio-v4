@@ -45,8 +45,9 @@ export const InputWithLabel = ({
         onFocus={() => setIsFocused(true)}
         onBlur={() => setIsFocused(false)}
         placeholder={shouldFloat ? placeholder : ''}
+        autoComplete="off"
         className={cn(
-          'border-0 border-b border-input rounded-none px-6 py-6 bg-transparent',
+          'border-0 border-b-2 border-input rounded-none p-6 bg-transparent',
           'focus-visible:ring-0 focus-visible:border-b-2 focus-visible:border-primary'
         )}
       />
