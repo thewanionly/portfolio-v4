@@ -11,6 +11,7 @@ interface InputWithLabelProps {
   placeholder?: string;
   type?: string;
   id: string;
+  hasError?: boolean;
 }
 
 export const InputWithLabel = ({
@@ -20,6 +21,7 @@ export const InputWithLabel = ({
   placeholder = '',
   type = 'text',
   id,
+  hasError,
 }: InputWithLabelProps) => {
   const [isFocused, setIsFocused] = useState(false);
 
@@ -48,7 +50,8 @@ export const InputWithLabel = ({
         autoComplete="off"
         className={cn(
           'border-0 border-b-2 border-input rounded-none p-6 bg-transparent',
-          'focus-visible:ring-0 focus-visible:border-b-2 focus-visible:border-primary'
+          'focus-visible:ring-0 focus-visible:border-primary',
+          hasError && 'border-destructive focus-visible:border-destructive'
         )}
       />
     </div>

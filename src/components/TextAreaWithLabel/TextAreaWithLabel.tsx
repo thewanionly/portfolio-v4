@@ -12,6 +12,7 @@ interface TextAreaWithLabelProps {
   type?: string;
   id: string;
   rows?: number;
+  hasError?: boolean;
 }
 
 export const TextAreaWithLabel = ({
@@ -21,6 +22,7 @@ export const TextAreaWithLabel = ({
   placeholder = '',
   id,
   rows,
+  hasError,
 }: TextAreaWithLabelProps) => {
   const [isFocused, setIsFocused] = useState(false);
 
@@ -49,8 +51,9 @@ export const TextAreaWithLabel = ({
         autoComplete="off"
         className={cn(
           'border-0 border-b-2 border-input rounded-none px-6 resize-none',
-          'focus-visible:ring-0 focus-visible:border-b-2 focus-visible:border-primary',
-          'bg-transparent'
+          'focus-visible:ring-0 focus-visible:border-primary',
+          'bg-transparent',
+          hasError && 'border-destructive focus-visible:border-destructive'
         )}
       />
     </div>

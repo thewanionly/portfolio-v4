@@ -3,7 +3,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 
 import { Button } from '@/components/ui/button';
-import { Form, FormControl, FormField, FormItem } from '@/components/ui/form';
+import { Form, FormControl, FormField, FormItem, FormMessage } from '@/components/ui/form';
 import { cn } from '@/lib/utils';
 import { InputWithLabel } from '../InputWithLabel';
 import { TextAreaWithLabel } from '../TextAreaWithLabel';
@@ -28,11 +28,17 @@ export const ContactForm = ({ className }: ContactFormProps) => {
     },
   });
 
+  const {
+    formState: { errors },
+  } = form;
+
   const onSubmit = (values: z.infer<typeof formSchema>) => {
     // Do something with the form values.
     // ✅ This will be type-safe and validated.
     console.log(values);
   };
+
+  console.log('### errors', form.formState.errors);
 
   return (
     <Form {...form}>
@@ -44,10 +50,17 @@ export const ContactForm = ({ className }: ContactFormProps) => {
           control={form.control}
           name="name"
           render={({ field }) => (
-            <FormItem>
+            <FormItem className="relative">
               <FormControl>
-                <InputWithLabel label="Name" id="name" placeholder="John Doe" {...field} />
+                <InputWithLabel
+                  label="Name"
+                  id="name"
+                  placeholder="John Doe"
+                  hasError={Boolean(errors.name)}
+                  {...field}
+                />
               </FormControl>
+              <FormMessage className="text-end absolute -bottom-6 right-0" />
             </FormItem>
           )}
         />
@@ -55,15 +68,17 @@ export const ContactForm = ({ className }: ContactFormProps) => {
           control={form.control}
           name="email"
           render={({ field }) => (
-            <FormItem>
+            <FormItem className="relative">
               <FormControl>
                 <InputWithLabel
                   label="Email"
                   id="email"
                   placeholder="johndoe@example.com"
+                  hasError={Boolean(errors.email)}
                   {...field}
                 />
               </FormControl>
+              <FormMessage className="text-end absolute -bottom-6 right-0" />
             </FormItem>
           )}
         />
@@ -71,16 +86,18 @@ export const ContactForm = ({ className }: ContactFormProps) => {
           control={form.control}
           name="subject"
           render={({ field }) => (
-            <FormItem>
+            <FormItem className="relative">
               <FormControl>
                 <InputWithLabel
                   label="Subject"
                   id="subject"
                   type="subject"
                   placeholder="Job Opportunity"
+                  hasError={Boolean(errors.subject)}
                   {...field}
                 />
               </FormControl>
+              <FormMessage className="text-end absolute -bottom-6 right-0" />
             </FormItem>
           )}
         />
@@ -88,7 +105,7 @@ export const ContactForm = ({ className }: ContactFormProps) => {
           control={form.control}
           name="message"
           render={({ field }) => (
-            <FormItem>
+            <FormItem className="relative">
               <FormControl>
                 <TextAreaWithLabel
                   label="Message"
@@ -96,9 +113,11 @@ export const ContactForm = ({ className }: ContactFormProps) => {
                   type="message"
                   placeholder="Hello. I am looking for a Software Engineer."
                   rows={4}
+                  hasError={Boolean(errors.message)}
                   {...field}
                 />
               </FormControl>
+              <FormMessage className="text-end absolute -bottom-6 right-0" />
             </FormItem>
           )}
         />
