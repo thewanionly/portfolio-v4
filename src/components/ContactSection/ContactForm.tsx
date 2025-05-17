@@ -4,6 +4,8 @@ import { useForm } from 'react-hook-form';
 
 import { Button } from '@/components/ui/button';
 import { Form, FormControl, FormField, FormItem, FormMessage } from '@/components/ui/form';
+import { Input } from '@/components/ui/input';
+
 import { cn } from '@/lib/utils';
 import { InputWithLabel } from '../InputWithLabel';
 import { TextAreaWithLabel } from '../TextAreaWithLabel';
@@ -14,6 +16,7 @@ const formSchema = z.object({
   email: z.string().email('Invalid email address'),
   subject: z.string().min(1, 'Subject is required'),
   message: z.string().min(1, 'Message is required'),
+  _gotcha: z.string(), // Honeypot field
 });
 
 type ContactFormProps = { className?: string };
@@ -40,6 +43,7 @@ export const ContactForm = ({ className }: ContactFormProps) => {
       email: '',
       subject: '',
       message: '',
+      _gotcha: '',
     },
   });
 
@@ -155,6 +159,25 @@ export const ContactForm = ({ className }: ContactFormProps) => {
                 />
               </FormControl>
               <FormMessage className="text-end absolute -bottom-6 right-0" />
+            </FormItem>
+          )}
+        />
+        {/* Honeypot field (https://help.formspree.io/hc/en-us/articles/360013580813-Honeypot-spam-filtering) */}
+        <FormField
+          control={form.control}
+          name="_gotcha"
+          render={({ field }) => (
+            <FormItem className="relative">
+              <FormControl>
+                <Input
+                  id="_gotcha"
+                  // className="hidden"
+                  type="text"
+                  value={field.value}
+                  onChange={(e) => field.onChange(e.target.value)}
+                  autoComplete="off"
+                />
+              </FormControl>
             </FormItem>
           )}
         />
