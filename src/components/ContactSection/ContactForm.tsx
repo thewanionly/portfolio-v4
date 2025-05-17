@@ -171,7 +171,7 @@ export const ContactForm = ({ className }: ContactFormProps) => {
               <FormControl>
                 <Input
                   id="_gotcha"
-                  // className="hidden"
+                  className="hidden"
                   type="text"
                   value={field.value}
                   onChange={(e) => field.onChange(e.target.value)}
