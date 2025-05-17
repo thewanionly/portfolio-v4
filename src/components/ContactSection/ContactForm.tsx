@@ -7,6 +7,7 @@ import { Form, FormControl, FormField, FormItem, FormMessage } from '@/component
 import { cn } from '@/lib/utils';
 import { InputWithLabel } from '../InputWithLabel';
 import { TextAreaWithLabel } from '../TextAreaWithLabel';
+import { useState } from 'react';
 
 const formSchema = z.object({
   name: z.string().min(1, 'Name is required'),
@@ -17,7 +18,21 @@ const formSchema = z.object({
 
 type ContactFormProps = { className?: string };
 
+enum SubmitStatus {
+  Idle = 'idle',
+  Submitting = 'submitting',
+  Success = 'success',
+  Error = 'error',
+}
+
+const FORMSPREE_ENDPOINT = 'https://formspree.io/f/xpwdbyjq';
+
 export const ContactForm = ({ className }: ContactFormProps) => {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [submitStatus, setSubmitStatus] = useState<SubmitStatus>(SubmitStatus.Idle);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [submitError, setSubmitError] = useState<string | null>(null);
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -30,15 +45,37 @@ export const ContactForm = ({ className }: ContactFormProps) => {
 
   const {
     formState: { errors },
+    reset,
   } = form;
 
-  const onSubmit = (values: z.infer<typeof formSchema>) => {
-    // Do something with the form values.
-    // ✅ This will be type-safe and validated.
-    console.log(values);
-  };
+  const onSubmit = async (values: z.infer<typeof formSchema>) => {
+    setSubmitStatus(SubmitStatus.Submitting);
+    setSubmitError(null);
 
-  console.log('### errors', form.formState.errors);
+    try {
+      const response = await fetch(FORMSPREE_ENDPOINT, {
+        method: 'POST',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(values),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data?.error || 'Something went wrong. Please try again.');
+      }
+
+      setSubmitStatus(SubmitStatus.Success);
+      reset();
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (err: any) {
+      setSubmitStatus(SubmitStatus.Error);
+      setSubmitError(err?.message);
+    }
+  };
 
   return (
     <Form {...form}>
