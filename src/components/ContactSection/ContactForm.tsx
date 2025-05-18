@@ -181,7 +181,7 @@ export const ContactForm = ({ className }: ContactFormProps) => {
             </FormItem>
           )}
         />
-        <Button className="self-end" type="submit">
+        <Button className="self-end md:text-base  md:h-10 md:px-6" type="submit">
           Submit
         </Button>
       </form>
