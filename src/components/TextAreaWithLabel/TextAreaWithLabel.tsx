@@ -13,6 +13,7 @@ interface TextAreaWithLabelProps {
   id: string;
   rows?: number;
   hasError?: boolean;
+  disabled?: boolean;
 }
 
 export const TextAreaWithLabel = ({
@@ -23,6 +24,7 @@ export const TextAreaWithLabel = ({
   id,
   rows,
   hasError,
+  disabled,
 }: TextAreaWithLabelProps) => {
   const [isFocused, setIsFocused] = useState(false);
 
@@ -54,6 +56,7 @@ export const TextAreaWithLabel = ({
           'bg-transparent',
           hasError && 'border-destructive focus-visible:border-destructive'
         )}
+        disabled={disabled}
       />
     </div>
   );

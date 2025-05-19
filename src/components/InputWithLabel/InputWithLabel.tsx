@@ -12,6 +12,7 @@ interface InputWithLabelProps {
   type?: string;
   id: string;
   hasError?: boolean;
+  disabled?: boolean;
 }
 
 export const InputWithLabel = ({
@@ -22,6 +23,7 @@ export const InputWithLabel = ({
   type = 'text',
   id,
   hasError,
+  disabled,
 }: InputWithLabelProps) => {
   const [isFocused, setIsFocused] = useState(false);
 
@@ -52,6 +54,7 @@ export const InputWithLabel = ({
           'focus-visible:ring-0 focus-visible:border-primary',
           hasError && 'border-destructive focus-visible:border-destructive'
         )}
+        disabled={disabled}
       />
     </div>
   );

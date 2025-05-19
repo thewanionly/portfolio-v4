@@ -10,6 +10,7 @@ import { cn } from '@/lib/utils';
 import { InputWithLabel } from '../InputWithLabel';
 import { TextAreaWithLabel } from '../TextAreaWithLabel';
 import { useState } from 'react';
+import { Loader2 } from 'lucide-react';
 
 const formSchema = z.object({
   name: z.string().min(1, 'Name is required'),
@@ -31,10 +32,11 @@ enum SubmitStatus {
 const FORMSPREE_ENDPOINT = 'https://formspree.io/f/xpwdbyjq';
 
 export const ContactForm = ({ className }: ContactFormProps) => {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [submitStatus, setSubmitStatus] = useState<SubmitStatus>(SubmitStatus.Idle);
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [submitError, setSubmitError] = useState<string | null>(null);
+
+  const isSubmitting = submitStatus === SubmitStatus.Submitting;
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -99,6 +101,7 @@ export const ContactForm = ({ className }: ContactFormProps) => {
                   placeholder="John Doe"
                   hasError={Boolean(errors.name)}
                   {...field}
+                  disabled={isSubmitting}
                 />
               </FormControl>
               <FormMessage className="text-end absolute -bottom-6 right-0" />
@@ -117,6 +120,7 @@ export const ContactForm = ({ className }: ContactFormProps) => {
                   placeholder="johndoe@example.com"
                   hasError={Boolean(errors.email)}
                   {...field}
+                  disabled={isSubmitting}
                 />
               </FormControl>
               <FormMessage className="text-end absolute -bottom-6 right-0" />
@@ -136,6 +140,7 @@ export const ContactForm = ({ className }: ContactFormProps) => {
                   placeholder="Job Opportunity"
                   hasError={Boolean(errors.subject)}
                   {...field}
+                  disabled={isSubmitting}
                 />
               </FormControl>
               <FormMessage className="text-end absolute -bottom-6 right-0" />
@@ -156,6 +161,7 @@ export const ContactForm = ({ className }: ContactFormProps) => {
                   rows={4}
                   hasError={Boolean(errors.message)}
                   {...field}
+                  disabled={isSubmitting}
                 />
               </FormControl>
               <FormMessage className="text-end absolute -bottom-6 right-0" />
@@ -181,8 +187,13 @@ export const ContactForm = ({ className }: ContactFormProps) => {
             </FormItem>
           )}
         />
-        <Button className="self-end md:text-base  md:h-10 md:px-6" type="submit">
-          Submit
+        <Button
+          className="self-end md:text-base md:h-10 md:px-6"
+          type="submit"
+          disabled={isSubmitting}
+        >
+          {isSubmitting && <Loader2 className="animate-spin" />}
+          {isSubmitting ? 'Submitting...' : 'Submit'}
         </Button>
       </form>
     </Form>
