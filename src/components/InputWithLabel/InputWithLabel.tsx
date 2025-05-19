@@ -33,7 +33,6 @@ export const InputWithLabel = ({
         htmlFor={id}
         className={cn(
           'absolute left-6 text-muted-foreground transition-all pointer-events-none uppercase',
-          'ml-[2px]',
           shouldFloat ? 'text-xs -top-4' : 'text-base top-2'
         )}
       >

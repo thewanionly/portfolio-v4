@@ -34,7 +34,6 @@ export const TextAreaWithLabel = ({
         htmlFor={id}
         className={cn(
           'absolute left-6 text-muted-foreground transition-all pointer-events-none uppercase',
-          'ml-[2px]',
           shouldFloat ? 'text-xs -top-4' : 'text-base top-2'
         )}
       >
@@ -50,7 +49,7 @@ export const TextAreaWithLabel = ({
         rows={rows}
         autoComplete="off"
         className={cn(
-          'border-0 border-b-2 border-input rounded-none px-6 resize-none',
+          'pt-4 mt-4 border-0 border-b-2 border-input rounded-none px-6 resize-none',
           'focus-visible:ring-0 focus-visible:border-primary',
           'bg-transparent',
           hasError && 'border-destructive focus-visible:border-destructive'
