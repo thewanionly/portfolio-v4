@@ -16,6 +16,12 @@ const Toaster = ({ ...props }: ToasterProps) => {
           '--normal-border': 'var(--border)',
         } as React.CSSProperties
       }
+      toastOptions={{
+        classNames: {
+          success: '!bg-success !text-background',
+          error: '!bg-destructive !text-background',
+        },
+      }}
       {...props}
     />
   );
