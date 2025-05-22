@@ -1,6 +1,7 @@
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
+import { toast } from 'sonner';
 
 import { Button } from '@/components/ui/button';
 import { Form, FormControl, FormField, FormItem, FormMessage } from '@/components/ui/form';
@@ -75,11 +76,15 @@ export const ContactForm = ({ className }: ContactFormProps) => {
       }
 
       setSubmitStatus(SubmitStatus.Success);
+      toast.success('Thanks for reaching out! I’ll get back to you soon.');
+
       reset();
+
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (err: any) {
       setSubmitStatus(SubmitStatus.Error);
       setSubmitError(err?.message);
+      toast.error('Oops, something went wrong. Please try again or you can email me directly.');
     }
   };
 
