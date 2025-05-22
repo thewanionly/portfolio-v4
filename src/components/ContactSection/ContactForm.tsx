@@ -84,7 +84,15 @@ export const ContactForm = ({ className }: ContactFormProps) => {
     } catch (err: any) {
       setSubmitStatus(SubmitStatus.Error);
       setSubmitError(err?.message);
-      toast.error('Oops, something went wrong. Please try again or you can email me directly.');
+      toast.error(
+        <p>
+          Oops, something went wrong. Please try again or you can{' '}
+          <a href="mailto:elloani.pitogo@gmail.com" className="underline">
+            email me
+          </a>{' '}
+          directly.
+        </p>
+      );
     }
   };
 
