@@ -96,6 +96,8 @@
 
   /* Others */
   --radius-blob-shape: 60% 40% 30% 70% / 60% 30% 70% 40%;
+  --breakpoint-xs: 30rem;
+  --breakpoint-2xs: 20rem;
 }
 
 @theme inline {
