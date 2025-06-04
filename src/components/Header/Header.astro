@@ -1,5 +1,6 @@
 ---
-import { Languages, Menu, Moon } from 'lucide-react';
+import { Menu } from 'lucide-react';
+// import { Languages, Menu, Moon } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
@@ -16,15 +17,16 @@ import Logo from '../Logo.astro';
   >
     <Logo class="shrink-0" />
     <div class="flex gap-4 md:gap-8">
-      <Button variant="ghost" size="icon">
+      {/** TODO: mode switcher */}
+      <!-- <Button variant="ghost" size="icon">
         <Moon className="size-5 md:size-6" />
-        <!-- <Sun /> -->
         <span class="sr-only">Change theme</span>
-      </Button>
-      <Button variant="ghost" size="icon">
+      </Button> -->
+      {/** TODO: i18n */}
+      <!-- <Button variant="ghost" size="icon">
         <Languages className="size-5 md:size-6" />
         <span class="sr-only">Change language</span>
-      </Button>
+      </Button> -->
       <Button className="md:hidden" variant="ghost" size="icon">
         <Menu className="size-5 md:size-6" />
         <span class="sr-only">Open menu</span>
