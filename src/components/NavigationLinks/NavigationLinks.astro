@@ -1,0 +1,37 @@
+---
+interface NavigationLink {
+  label: string;
+  href: string;
+}
+
+const navigationLinks: NavigationLink[] = [
+  {
+    label: 'About',
+    href: '#about',
+  },
+  {
+    label: 'Skills',
+    href: '#skills',
+  },
+  {
+    label: 'Projects',
+    href: '#projects',
+  },
+  {
+    label: 'Contact',
+    href: '#contact',
+  },
+];
+---
+
+<nav>
+  <ul class="flex gap-8">
+    {
+      navigationLinks.map(({ label, href }) => (
+        <a href={href} class="text-foreground hover:text-brand">
+          {label}
+        </a>
+      ))
+    }
+  </ul>
+</nav>

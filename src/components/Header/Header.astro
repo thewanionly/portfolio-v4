@@ -5,6 +5,7 @@ import { Menu } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 import Logo from '../Logo.astro';
+import NavigationLinks from '../NavigationLinks';
 ---
 
 <header class={cn('sticky -top-0.25 z-50', 'backdrop-blur-md bg-background/80')}>
@@ -16,6 +17,7 @@ import Logo from '../Logo.astro';
     )}
   >
     <Logo class="shrink-0" />
+    <NavigationLinks />
     <div class="flex gap-4 md:gap-8">
       {/** TODO: mode switcher */}
       <!-- <Button variant="ghost" size="icon">
