@@ -1,4 +1,6 @@
 ---
+import { cn } from '@/lib/utils';
+
 interface NavigationLink {
   label: string;
   href: string;
@@ -22,9 +24,11 @@ const navigationLinks: NavigationLink[] = [
     href: '#contact',
   },
 ];
+
+const { class: className } = Astro.props;
 ---
 
-<nav>
+<nav class={cn(className)}>
   <ul class="flex gap-8">
     {
       navigationLinks.map(({ label, href }) => (
