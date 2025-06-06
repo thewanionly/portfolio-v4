@@ -29,7 +29,7 @@ const { class: className } = Astro.props;
 ---
 
 <nav class={cn(className)}>
-  <ul class="flex gap-8">
+  <ul class="flex xs:gap-8 gap-6 xs:flex-row flex-col items-center">
     {
       navigationLinks.map(({ label, href }) => (
         <a href={href} class="text-foreground hover:text-brand">

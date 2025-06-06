@@ -2,6 +2,7 @@
 import Socials from '../Socials.astro';
 import Logo from '../Logo.astro';
 import { cn } from '@/lib/utils';
+import NavigationLinks from '../NavigationLinks';
 
 const currentYear = new Date().getFullYear();
 ---
@@ -19,11 +20,12 @@ const currentYear = new Date().getFullYear();
       <Logo class="mb-7 md:justify-self-start md:mb-0" />
       <Socials
         class={cn(
-          'mb-12.5 ',
+          'mb-17 ',
           'md:justify-self-start md:mb-0',
           'md:col-start-1 md:col-end-2 md:row-start-2 md:row-end-3'
         )}
       />
+      <NavigationLinks class="mb-13 md:mb-0 md:justify-self-end" />
       <p
         class={cn(
           'text-muted-foreground text-xs text-center',
