@@ -1,11 +1,10 @@
 ---
-import { Menu } from 'lucide-react';
 // import { Languages, Menu, Moon } from 'lucide-react';
 
-import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 import Logo from '../Logo.astro';
 import NavigationLinks from '../NavigationLinks';
+import { MobileMenuButton } from './MobileMenuButton';
 ---
 
 <header class={cn('sticky top-0 z-50', 'backdrop-blur-md bg-background/80')}>
@@ -23,10 +22,7 @@ import NavigationLinks from '../NavigationLinks';
         <Languages className="size-5 md:size-6" />
         <span class="sr-only">Change language</span>
       </Button> -->
-      <Button className="md:hidden" variant="ghost" size="icon">
-        <Menu className="size-5 md:size-6" />
-        <span class="sr-only">Open menu</span>
-      </Button>
+      <MobileMenuButton client:load />
     </div>
   </div>
 </header>
