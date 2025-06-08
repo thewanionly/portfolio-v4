@@ -1,5 +1,5 @@
 import { Menu, X } from 'lucide-react';
-import { Button } from '../ui/button';
+import { Button } from '../../ui/button';
 import { useMobileMenuStore } from './MobileMenu.store';
 
 export const MobileMenuButton = () => {
