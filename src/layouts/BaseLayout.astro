@@ -20,6 +20,8 @@ import { Toaster } from '@/components/ui/sonner';
   </head>
   <body>
     <Header />
+    {/* Portal target for mobile menu */}
+    <div id="mobile-menu-root" class="relative top-0 left-0"></div>
     <slot />
     <Footer />
     <Toaster client:idle />
