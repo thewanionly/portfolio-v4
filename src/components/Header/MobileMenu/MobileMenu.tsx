@@ -1,5 +1,12 @@
 import { useMobileMenuStore } from './MobileMenu.store';
-import { Sheet, SheetContent, SheetOverlay, SheetPortal } from '@/components/ui/sheet';
+import {
+  Sheet,
+  SheetContent,
+  SheetDescription,
+  SheetOverlay,
+  SheetPortal,
+  SheetTitle,
+} from '@/components/ui/sheet';
 import { useEffect, useState } from 'react';
 
 interface NavigationLink {
@@ -41,6 +48,10 @@ export const MobileMenu = () => {
       <SheetPortal container={portalTarget}>
         <SheetOverlay className="z-40 absolute h-dvh" />
         <SheetContent side="top" showCloseButton={false} className="p-6 pt-2 absolute">
+          {/* Screen-reader-only title & description */}
+          <SheetTitle className="sr-only">Mobile Navigation</SheetTitle>
+          <SheetDescription className="sr-only">Navigation links for mobile menu</SheetDescription>
+
           <nav>
             <ul className="flex xs:gap-8 gap-6 xs:flex-row flex-col items-center">
               {navigationLinks.map(({ label, href }) => (
