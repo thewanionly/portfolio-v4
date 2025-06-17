@@ -46,8 +46,12 @@ export const MobileMenu = () => {
   return (
     <Sheet open={isOpen} onOpenChange={toggleIsOpen}>
       <SheetPortal container={portalTarget}>
-        <SheetOverlay className="z-40 absolute h-dvh" />
-        <SheetContent side="top" showCloseButton={false} className="p-6 pt-2 absolute">
+        <SheetOverlay className="z-40 fixed h-dvh" />
+        <SheetContent
+          side="top"
+          showCloseButton={false}
+          className="backdrop-blur-md bg-background/80 p-6 pt-2 absolute"
+        >
           {/* Screen-reader-only title & description */}
           <SheetTitle className="sr-only">Mobile Navigation</SheetTitle>
           <SheetDescription className="sr-only">Navigation links for mobile menu</SheetDescription>
