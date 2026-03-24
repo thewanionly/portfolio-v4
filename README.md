@@ -14,6 +14,19 @@ Version 4 of my portfolio website.
 
 Starting the local dev server
 
+Create a local env file for the Astro app:
+
+```bash
+cp .env.example .env.local
+```
+
+Add your Sanity project values:
+
+```bash
+PUBLIC_SANITY_PROJECT_ID=
+PUBLIC_SANITY_DATASET=
+```
+
 ```bash
 npm run dev
 ```
