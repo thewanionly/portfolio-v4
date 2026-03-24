@@ -29,10 +29,11 @@ const heroSection = await sanityClient.fetch<HeroSectionQueryResult>(heroSection
         <h1 class="text-foreground text-4xl leading-[1.25] font-bold md:text-5xl lg:text-7xl text-balance mb-4 md:mb-2">
           {heroSection.greeting}
           <br />
-          {heroSection.intro} <span class="text-brand">{heroSection.name}</span>.
+          {`${heroSection.intro} `}
+          <span class="text-brand">{heroSection.name}</span>.
         </h1>
         <p class="mb-7 md:mb-6 lg:mb-8 text-foreground/90 leading-[1.625] md:text-lg lg:text-2xl italic">
-          {heroSection.nicknamePrefix}{' '}
+          {`${heroSection.nicknamePrefix} `}
           <span class="font-bold text-brand">{heroSection.nickname}</span>!
         </p>
         <div class="md:hidden w-full bg-[url(/src/assets/wave-line.svg)] bg-contain bg-no-repeat bg-center">
