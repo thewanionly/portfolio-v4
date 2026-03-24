@@ -51,6 +51,7 @@ Sanity Studio reads these variables from `studio-portfolio-v4/.env.local`:
 ```bash
 SANITY_STUDIO_PROJECT_ID=
 SANITY_STUDIO_DATASET=
+SANITY_STUDIO_APP_ID=
 ```
 
 Fill those values from your Sanity project settings before starting the Studio.

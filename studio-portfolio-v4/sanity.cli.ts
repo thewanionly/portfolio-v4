@@ -1,5 +1,5 @@
 import {defineCliConfig} from 'sanity/cli'
-import {sanityDataset, sanityProjectId} from './environment'
+import {sanityAppId, sanityDataset, sanityProjectId} from './environment'
 
 export default defineCliConfig({
   api: {
@@ -11,6 +11,7 @@ export default defineCliConfig({
      * Enable auto-updates for studios.
      * Learn more at https://www.sanity.io/docs/studio/latest-version-of-sanity#k47faf43faf56
      */
+    appId: sanityAppId,
     autoUpdates: true,
   },
 })

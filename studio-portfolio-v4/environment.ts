@@ -9,3 +9,5 @@ export const sanityProjectId =
 
 export const sanityDataset =
   process.env.SANITY_STUDIO_DATASET || missingEnv('SANITY_STUDIO_DATASET')
+
+export const sanityAppId = process.env.SANITY_STUDIO_APP_ID || missingEnv('SANITY_STUDIO_APP_ID')

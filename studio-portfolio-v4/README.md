@@ -13,6 +13,7 @@ Required variables:
 ```bash
 SANITY_STUDIO_PROJECT_ID=
 SANITY_STUDIO_DATASET=
+SANITY_STUDIO_APP_ID=
 ```
 
 Fill those values from your Sanity project settings. They are Studio configuration, not secrets, because Sanity exposes `SANITY_STUDIO_*` variables to the Studio bundle.
