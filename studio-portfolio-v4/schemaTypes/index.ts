@@ -1,3 +1,4 @@
 import {heroSectionType} from './heroSection'
+import {aboutSectionType} from './aboutSection'
 
-export const schemaTypes = [heroSectionType]
+export const schemaTypes = [heroSectionType, aboutSectionType]
