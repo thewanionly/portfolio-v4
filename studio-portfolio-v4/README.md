@@ -23,13 +23,13 @@ Fill those values from your Sanity project settings. They are Studio configurati
 Install dependencies:
 
 ```bash
-pnpm install
+npm install
 ```
 
 Start the Studio:
 
 ```bash
-pnpm dev
+npm run dev
 ```
 
 ## Reference

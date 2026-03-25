@@ -37,7 +37,7 @@ Install dependencies for the Studio:
 
 ```bash
 cd studio-portfolio-v4
-pnpm install
+npm install
 ```
 
 Create a local env file for the Studio:
@@ -59,13 +59,13 @@ Fill those values from your Sanity project settings before starting the Studio.
 Run the Studio locally:
 
 ```bash
-pnpm dev
+npm run dev
 ```
 
 Or run it from the project root:
 
 ```bash
-pnpm studio:dev
+npm run studio:dev
 ```
 
 Building the site
