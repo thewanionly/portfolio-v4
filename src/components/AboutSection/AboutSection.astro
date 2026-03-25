@@ -1,74 +1,38 @@
 ---
-import { Image } from 'astro:assets';
+import { sanityClient } from 'sanity:client';
 
-import devProductivity from '@/assets/images/dev-productivity.svg';
-import globalTeam from '@/assets/images/global-team.svg';
-import learning from '@/assets/images/learning.svg';
+import { aboutSectionQuery } from '@/lib/sanity/queries';
+import type { AboutSectionQueryResult } from '@/lib/sanity/queries';
+
+const aboutSection = await sanityClient.fetch<AboutSectionQueryResult>(aboutSectionQuery);
 ---
 
-<section id="about" class="scroll-mt-10 md:scroll-mt-15 lg:scroll-mt-20">
-  <div class="section-wrapper py-16">
-    <h2
-      class="text-4xl md:text-5xl lg:text-6xl text-center md:text-start font-bold mb-10 md:mb-15 lg:mb-20"
-    >
-      <a href="#about">About Me</a>
-    </h2>
-    <div class="flex flex-col gap-20 md:gap-15">
-      <div class="flex flex-col md:flex-row gap-6 items-center justify-between mx-auto md:mx-0">
-        <p class="body-text text-center md:text-start">
-          I'm an experienced frontend engineer for over 6 years now. I've been using ReactJS ever
-          since and have progressed into incorporating TypeScript and NextJS in my technology stack.
-          I'm also proficient in other front-end development technologies and tools. I'm still
-          actively and passionately polishing my craft as well as keeping up to date with new
-          technologies.
-        </p>
-        <div class="aspect-[2] max-w-[380px] min-w-[222px]">
-          <Image
-            class="w-full h-full object-contain"
-            src={devProductivity}
-            alt="A man coding in his laptop"
-            loading="eager"
-            decoding="auto"
-          />
+{
+  aboutSection && (
+    <section id="about" class="scroll-mt-10 md:scroll-mt-15 lg:scroll-mt-20">
+      <div class="section-wrapper py-16">
+        <h2 class="text-4xl md:text-5xl lg:text-6xl text-center md:text-start font-bold mb-10 md:mb-15 lg:mb-20">
+          <a href="#about">{aboutSection.title}</a>
+        </h2>
+        <div class="flex flex-col gap-20 md:gap-15">
+          {aboutSection.entries.map((entry) => (
+            <div class="flex flex-col md:flex-row gap-6 items-center justify-between mx-auto md:mx-0">
+              <p class="body-text text-center md:text-start">{entry.body}</p>
+              {entry.illustration?.asset?.url && (
+                <div class="aspect-[2] max-w-[380px] min-w-[222px]">
+                  <img
+                    class="w-full h-full object-contain"
+                    src={entry.illustration.asset.url}
+                    alt={entry.illustration.alt || ''}
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </div>
+              )}
+            </div>
+          ))}
         </div>
       </div>
-      <div class="flex flex-col md:flex-row gap-6 items-center justify-between mx-auto md:mx-0">
-        <p class="body-text text-center md:text-start">
-          I have been exposed into working with different clients under different projects, teams
-          and culture over the years in this industry. I'm currently working as a senior frontend
-          engineer for a UK-based company in maintaining and developing new features for an
-          e-commerce web application. In the past, I have worked with another British client in
-          building CRM-related web applications where I'm reporting directly to the company's CTO
-          and I've also worked with a Japanese client in maintaining and building the UI of their
-          multi-functional printer panel and even got deployed in Japan for over half a year.
-        </p>
-        <div class="aspect-[2] max-w-[380px] min-w-[222px]">
-          <Image
-            class="w-full h-full object-contain"
-            src={globalTeam}
-            alt="World map showing three avatars across the world"
-            loading="eager"
-            decoding="auto"
-          />
-        </div>
-      </div>
-      <div class="flex flex-col md:flex-row gap-6 items-center justify-between mx-auto md:mx-0">
-        <p class="body-text text-center md:text-start">
-          I'm a diligent and self-motivated person. I'm passionate at my craft and I'm interested in
-          furthering my knowledge in web technologies. I'm currently honing my front-end and UI/UX
-          development skills but I'm open to venture into other fields in software development such
-          as mobile development, back-end development among others.
-        </p>
-        <div class="aspect-[2] max-w-[380px] min-w-[222px]">
-          <Image
-            class="w-full h-full object-contain"
-            src={learning}
-            alt="A man standing reading a book"
-            loading="eager"
-            decoding="auto"
-          />
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+    </section>
+  )
+}

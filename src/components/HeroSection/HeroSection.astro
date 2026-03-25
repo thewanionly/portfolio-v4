@@ -1,47 +1,52 @@
 ---
+import { sanityClient } from 'sanity:client';
+
 import { cn } from '@/lib/utils';
+import { heroSectionQuery } from '@/lib/sanity/queries';
+import type { HeroSectionQueryResult } from '@/lib/sanity/queries';
 
 import MyImage from './MyImage.astro';
 import Socials from '../Socials.astro';
 import CTAButtons from './CTAButtons.astro';
+
+const heroSection = await sanityClient.fetch<HeroSectionQueryResult>(heroSectionQuery);
 ---
 
-<section
-  class={cn(
-    'section-wrapper md:mt-16 lg:mt-22.5 mt-8 mb-25 md:mb-37 lg:mb-50',
-    'md:flex md:justify-between md:gap-8'
-  )}
->
-  <div
-    class={cn(
-      'flex flex-col items-center text-center md:items-start md:text-left md:w-[70%]',
-      'md:bg-[url(/src/assets/wave-line.svg)] md:bg-contain md:bg-no-repeat md:bg-left'
-    )}
-  >
-    <h1
-      class="text-foreground text-4xl leading-[1.25] font-bold md:text-5xl lg:text-7xl text-balance mb-4 md:mb-2"
+{
+  heroSection && (
+    <section
+      class={cn(
+        'section-wrapper md:mt-16 lg:mt-22.5 mt-8 mb-25 md:mb-37 lg:mb-50',
+        'md:flex md:justify-between md:gap-8'
+      )}
     >
-      Hi there!<br />I'm <span class="text-brand">Elloani Pitogo</span>.
-    </h1>
-    <p
-      class="mb-7 md:mb-6 lg:mb-8 text-foreground/90 leading-[1.625] md:text-lg lg:text-2xl italic"
-    >
-      You can call me <span class="font-bold text-brand">Wani</span>!
-    </p>
-    <div
-      class="md:hidden w-full bg-[url(/src/assets/wave-line.svg)] bg-contain bg-no-repeat bg-center"
-    >
-      <MyImage class="max-w-[15rem] mx-auto mb-6" />
-    </div>
-    <Socials class="md:hidden mb-7" />
-    <p class="body-text mb-10 lg:mb-12">
-      I'm a Frontend Software Engineer with over 6 years of experience. I'm currently based in The
-      Philippines.
-    </p>
-    <CTAButtons />
-  </div>
-  <div class="hidden md:flex md:flex-col md:items-center">
-    <MyImage class="w-full max-w-xs mb-8" />
-    <Socials />
-  </div>
-</section>
+      <div
+        class={cn(
+          'flex flex-col items-center text-center md:items-start md:text-left md:w-[70%]',
+          'md:bg-[url(/src/assets/wave-line.svg)] md:bg-contain md:bg-no-repeat md:bg-left'
+        )}
+      >
+        <h1 class="text-foreground text-4xl leading-[1.25] font-bold md:text-5xl lg:text-7xl text-balance mb-4 md:mb-2">
+          {heroSection.greeting}
+          <br />
+          {`${heroSection.intro} `}
+          <span class="text-brand">{heroSection.name}</span>.
+        </h1>
+        <p class="mb-7 md:mb-6 lg:mb-8 text-foreground/90 leading-[1.625] md:text-lg lg:text-2xl italic">
+          {`${heroSection.nicknamePrefix} `}
+          <span class="font-bold text-brand">{heroSection.nickname}</span>!
+        </p>
+        <div class="md:hidden w-full bg-[url(/src/assets/wave-line.svg)] bg-contain bg-no-repeat bg-center">
+          <MyImage class="max-w-[15rem] mx-auto mb-6" image={heroSection.portrait} />
+        </div>
+        <Socials class="md:hidden mb-7" links={heroSection.socialLinks} />
+        <p class="body-text mb-10 lg:mb-12">{heroSection.summary}</p>
+        <CTAButtons buttons={heroSection.ctaButtons} />
+      </div>
+      <div class="hidden md:flex md:flex-col md:items-center">
+        <MyImage class="w-full max-w-xs mb-8" image={heroSection.portrait} />
+        <Socials links={heroSection.socialLinks} />
+      </div>
+    </section>
+  )
+}

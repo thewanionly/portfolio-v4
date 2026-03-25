@@ -1,25 +1,46 @@
 ---
 import { cn } from '@/lib/utils';
+import type { HeroSectionQueryResult } from '@/lib/sanity/queries';
 import { Icon } from 'astro-icon/components';
 
-const { class: className } = Astro.props;
+type SocialLink = NonNullable<HeroSectionQueryResult>['socialLinks'][number];
+
+const { class: className, links = [] } = Astro.props as {
+  class?: string;
+  links?: SocialLink[];
+};
+
+const iconMap: Record<string, string> = {
+  github: 'github',
+  linkedin: 'linkedin',
+};
 ---
 
-<div class={cn('flex gap-4 justify-center md:justify-start', className)}>
-  <a
-    class="text-foreground hover:text-brand focus-visible:text-brand"
-    href="https://github.com/thewanionly/"
-    target="_blank"
-    aria-label="Github"
-  >
-    <Icon name="github" class="size-5 md:size-6" />
-  </a>
-  <a
-    class="text-foreground hover:text-brand focus-visible:text-brand"
-    href="https://www.linkedin.com/in/pitogoelloaniross/"
-    target="_blank"
-    aria-label="LinkedIn"
-  >
-    <Icon name="linkedin" class="size-5 md:size-6" />
-  </a>
-</div>
+{
+  links.length > 0 && (
+    <div class={cn('flex gap-4 justify-center md:justify-start', className)}>
+      {links.map((link) => {
+        const iconName = iconMap[link.platform];
+
+        return (
+          <a
+            class={cn(
+              'text-foreground hover:text-brand focus-visible:text-brand',
+              !iconName && 'text-xs md:text-sm font-semibold uppercase'
+            )}
+            href={link.href}
+            target="_blank"
+            rel="noreferrer noopener"
+            aria-label={link.label}
+          >
+            {iconName ? (
+              <Icon name={iconName} class="size-5 md:size-6" />
+            ) : (
+              <span>{link.label.slice(0, 2)}</span>
+            )}
+          </a>
+        );
+      })}
+    </div>
+  )
+}

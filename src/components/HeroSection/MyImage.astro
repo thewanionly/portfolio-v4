@@ -3,16 +3,42 @@ import { Image } from 'astro:assets';
 
 import myImage from '@/assets/images/me.jpg';
 import { cn } from '@/lib/utils';
+import type { HeroSectionQueryResult } from '@/lib/sanity/queries';
 
-const { class: className } = Astro.props;
+type Portrait = NonNullable<HeroSectionQueryResult>['portrait'];
+
+const { class: className, image } = Astro.props as {
+  class?: string;
+  image?: Portrait;
+};
+
+const portraitUrl = image?.asset?.url;
+const portraitAlt = image?.alt || 'Portrait of Elloani Pitogo seated at a table with hands clasped';
+const portraitWidth = image?.asset?.metadata?.dimensions?.width;
+const portraitHeight = image?.asset?.metadata?.dimensions?.height;
 ---
 
 <div class={cn('rounded-blob-shape w-[55%] min-w-[10rem] aspect-square', className)}>
-  <Image
-    class="rounded-blob-shape w-full aspect-square object-cover"
-    src={myImage}
-    alt="Elloani Ross Pitogo wearing beige long sleeve, sling bag, and watch with hands together placed in a table"
-    loading="eager"
-    decoding="auto"
-  />
+  {
+    portraitUrl ? (
+      <img
+        class="rounded-blob-shape w-full aspect-square object-cover"
+        src={portraitUrl}
+        alt={portraitAlt}
+        width={portraitWidth}
+        height={portraitHeight}
+        loading="eager"
+        decoding="async"
+        fetchpriority="high"
+      />
+    ) : (
+      <Image
+        class="rounded-blob-shape w-full aspect-square object-cover"
+        src={myImage}
+        alt={portraitAlt}
+        loading="eager"
+        decoding="auto"
+      />
+    )
+  }
 </div>
