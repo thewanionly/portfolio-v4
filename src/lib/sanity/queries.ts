@@ -113,3 +113,41 @@ export const aboutSectionQuery = `
     }
   }
 `;
+
+export type SkillsSectionQueryResult = {
+  _id: string;
+  _updatedAt: string;
+  title: string;
+  skills: Array<{
+    _key: string;
+    label: string;
+    icon?: {
+      asset?: {
+        _id: string;
+        url: string;
+        originalFilename?: string;
+        mimeType?: string;
+      };
+    } | null;
+  }>;
+} | null;
+
+export const skillsSectionQuery = `
+  *[_type == "skillsSection"] | order(_updatedAt desc)[0]{
+    _id,
+    _updatedAt,
+    title,
+    "skills": coalesce(skills, [])[]{
+      _key,
+      label,
+      icon{
+        asset->{
+          _id,
+          url,
+          originalFilename,
+          mimeType
+        }
+      }
+    }
+  }
+`;
