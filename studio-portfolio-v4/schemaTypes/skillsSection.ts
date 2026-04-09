@@ -54,7 +54,7 @@ export const skillsSectionType = defineType({
           },
         }),
       ],
-      validation: (Rule) => Rule.required().min(1).max(24),
+      validation: (Rule) => Rule.required().min(1),
     }),
   ],
   preview: {
