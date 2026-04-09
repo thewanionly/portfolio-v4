@@ -1,7 +1,4 @@
 ---
-import { Image } from 'astro:assets';
-
-import myImage from '@/assets/images/me.jpg';
 import { cn } from '@/lib/utils';
 import type { HeroSectionQueryResult } from '@/lib/sanity/queries';
 
@@ -20,7 +17,7 @@ const portraitHeight = image?.asset?.metadata?.dimensions?.height;
 
 <div class={cn('rounded-blob-shape w-[55%] min-w-[10rem] aspect-square', className)}>
   {
-    portraitUrl ? (
+    portraitUrl && (
       <img
         class="rounded-blob-shape w-full aspect-square object-cover"
         src={portraitUrl}
@@ -30,14 +27,6 @@ const portraitHeight = image?.asset?.metadata?.dimensions?.height;
         loading="eager"
         decoding="async"
         fetchpriority="high"
-      />
-    ) : (
-      <Image
-        class="rounded-blob-shape w-full aspect-square object-cover"
-        src={myImage}
-        alt={portraitAlt}
-        loading="eager"
-        decoding="auto"
       />
     )
   }

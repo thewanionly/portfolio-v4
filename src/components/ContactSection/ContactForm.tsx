@@ -32,7 +32,16 @@ enum SubmitStatus {
 
 const FORMSPREE_ENDPOINT = 'https://formspree.io/f/xpwdbyjq';
 
-export const ContactForm = ({ className }: ContactFormProps) => {
+type ContactFormContentProps = {
+  emailAddress: string;
+  submitButtonLabel: string;
+};
+
+export const ContactForm = ({
+  className,
+  emailAddress,
+  submitButtonLabel,
+}: ContactFormProps & ContactFormContentProps) => {
   const [submitStatus, setSubmitStatus] = useState<SubmitStatus>(SubmitStatus.Idle);
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [submitError, setSubmitError] = useState<string | null>(null);
@@ -87,10 +96,10 @@ export const ContactForm = ({ className }: ContactFormProps) => {
       toast.error(
         <p>
           Oops, something went wrong. Please try again or you can{' '}
-          <a href="mailto:elloani.pitogo@gmail.com" className="underline">
-            email me
+          <a href={`mailto:${emailAddress}`} className="underline">
+            email me directly
           </a>{' '}
-          directly.
+          instead.
         </p>
       );
     }
@@ -206,7 +215,7 @@ export const ContactForm = ({ className }: ContactFormProps) => {
           disabled={isSubmitting}
         >
           {isSubmitting && <Loader2 className="animate-spin" />}
-          {isSubmitting ? 'Submitting...' : 'Submit'}
+          {isSubmitting ? 'Submitting...' : submitButtonLabel}
         </Button>
       </form>
     </Form>

@@ -1,155 +1,49 @@
 ---
+import { sanityClient } from 'sanity:client';
+
 import { Image } from 'astro:assets';
 
 import swoop from '@/assets/swoop.svg';
 
+import { projectsSectionQuery } from '@/lib/sanity/queries';
+import type { ProjectsSectionQueryResult } from '@/lib/sanity/queries';
 import type { Project } from './ProjectsSection.types';
-
-import img1 from '@/assets/images/entertainment-web-app-wani.png';
-import img2 from '@/assets/images/audiophile-wani.png';
-import img3 from '@/assets/images/devfinder-wani.png';
-import img4 from '@/assets/images/password-generator-wani.png';
-import img5 from '@/assets/images/rock-paper-scissors.png';
-import img6 from '@/assets/images/todo-app-wani.png';
 import { ProjectCarousel } from './ProjectCarousel';
 import { ProjectGrid } from './ProjectGrid';
 
-// TODO: move these to CMS
-const projects: Project[] = [
-  {
-    id: '1',
-    imgSrc: img1.src,
-    imgAlt: 'Screenshot of the desktop view of entertainment web app',
-    title: 'Entertainment Web App',
-    technologies: [
-      'Next.js',
-      'React',
-      'TypeScript',
-      'JavaScript',
-      'Tailwind CSS',
-      'Jest',
-      'React Testing Library',
-      'Storybook',
-      'Zustand',
-      'shadcn',
-      'Framer Motion',
-    ],
-    projectUrl: 'https://entertainment-web-app-wani.vercel.app',
-    sourceCodeUrl: 'https://github.com/thewanionly/entertainment-web-app',
-  },
-  {
-    id: '2',
-    imgSrc: img2.src,
-    imgAlt: 'Screenshot of the desktop view of Audiophile app',
-    title: 'Audiophile',
-    technologies: [
-      'Next.js',
-      'React',
-      'TypeScript',
-      'JavaScript',
-      'emotion styled',
-      'Jest',
-      'React Testing Library',
-      'Zustand',
-      'React Hook Form',
-      'Zod',
-      'Sanity CMS',
-    ],
-    projectUrl: 'https://audiophile-wani.vercel.app',
-    sourceCodeUrl: 'https://github.com/thewanionly/audiophile',
-  },
-  {
-    id: '3',
-    imgSrc: img3.src,
-    imgAlt: 'Screenshot of the desktop view of Dev Finder app',
-    title: 'Dev Finder',
-    technologies: [
-      'React',
-      'TypeScript',
-      'JavaScript',
-      'HTML5',
-      'CSS3',
-      'styled-components',
-      'Jest',
-      'React Testing Library',
-      'Vite',
-    ],
-    projectUrl: 'https://devfinder-wani.vercel.app',
-    sourceCodeUrl: 'https://github.com/thewanionly/devfinder',
-  },
-  {
-    id: '4',
-    imgSrc: img4.src,
-    imgAlt: 'Screenshot of the desktop view of Password Generator app',
-    title: 'Password Generator',
-    technologies: [
-      'Next.js',
-      'React',
-      'TypeScript',
-      'JavaScript',
-      'Tailwind CSS',
-      'Storybook',
-      'Jest',
-      'React Testing Library',
-      'ShadcnUI',
-    ],
-    projectUrl: 'https://password-generator-wani.vercel.app',
-    sourceCodeUrl: 'https://github.com/thewanionly/password-generator',
-  },
-  {
-    id: '5',
-    imgSrc: img5.src,
-    imgAlt: 'Screenshot of the desktop view of Rock Paper Scissors app',
-    title: 'Rock Paper Scissors',
-    technologies: [
-      'React',
-      'TypeScript',
-      'JavaScript',
-      'HTML5',
-      'CSS3',
-      'styled-components',
-      'Jest',
-      'React Testing Library',
-      'Vite',
-    ],
-    projectUrl: 'https://rockpaperscissors-wani.vercel.app',
-    sourceCodeUrl: 'https://github.com/thewanionly/rock-paper-scissors',
-  },
-  {
-    id: '6',
-    imgSrc: img6.src,
-    imgAlt: 'Screenshot of the desktop view of Todo app',
-    title: 'Todo App',
-    technologies: [
-      'Next.js',
-      'React',
-      'TypeScript',
-      'JavaScript',
-      'Tailwind CSS',
-      'Storybook',
-      'Jest',
-      'React Testing Library',
-    ],
-    projectUrl: 'https://todo-app-wani.vercel.app',
-    sourceCodeUrl: 'https://github.com/thewanionly/todo-app',
-  },
-];
+const projectsSection = await sanityClient.fetch<ProjectsSectionQueryResult>(projectsSectionQuery);
+
+const projects: Project[] =
+  projectsSection?.projects
+    .filter((project) => project.isVisible !== false)
+    .filter((project) => project.image?.asset?.url)
+    .map((project) => ({
+      id: project._key,
+      imgSrc: project.image?.asset?.url || '',
+      imgAlt: project.image?.alt || `${project.title} screenshot`,
+      title: project.title,
+      technologies: project.technologies,
+      projectUrl: project.projectUrl,
+      sourceCodeUrl: project.sourceCodeUrl,
+    })) || [];
 ---
 
-<section id="projects" class="scroll-mt-10 md:scroll-mt-15 lg:scroll-mt-20">
-  <div class="section-wrapper py-16">
-    <h2
-      class="text-4xl md:text-5xl lg:text-6xl text-center md:text-start font-bold mb-10 md:mb-15 lg:mb-20"
-    >
-      <a href="#projects">Projects</a>
-    </h2>
+{
+  projectsSection && projects.length > 0 && (
+    <section id="projects" class="scroll-mt-10 md:scroll-mt-15 lg:scroll-mt-20">
+      <div class="section-wrapper py-16">
+        <h2 class="text-4xl md:text-5xl lg:text-6xl text-center md:text-start font-bold mb-10 md:mb-15 lg:mb-20">
+          <a href="#projects">{projectsSection.title}</a>
+        </h2>
 
-    <div class="block md:hidden">
-      <ProjectCarousel projects={projects} client:visible />
-    </div>
-    <div class="hidden md:block">
-      <ProjectGrid projects={projects} client:visible />
-    </div>
-  </div>
-  <Image class="-mb-0.25 w-full mt-16" src={swoop} alt="" loading="eager" decoding="auto" />
-</section>
+        <div class="block md:hidden">
+          <ProjectCarousel projects={projects} client:visible />
+        </div>
+        <div class="hidden md:block">
+          <ProjectGrid projects={projects} client:visible />
+        </div>
+      </div>
+      <Image class="-mb-0.25 w-full mt-16" src={swoop} alt="" loading="eager" decoding="auto" />
+    </section>
+  )
+}

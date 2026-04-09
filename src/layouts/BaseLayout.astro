@@ -3,12 +3,44 @@
 import '@fontsource-variable/plus-jakarta-sans';
 import Analytics from '@vercel/analytics/astro';
 import SpeedInsights from '@vercel/speed-insights/astro';
+import { sanityClient } from 'sanity:client';
 
 import '@/styles/global.css';
 
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
+import { footerSettingsQuery, globalSeoQuery, navigationSettingsQuery } from '@/lib/sanity/queries';
+import type {
+  FooterSettingsQueryResult,
+  GlobalSeoQueryResult,
+  NavigationSettingsQueryResult,
+} from '@/lib/sanity/queries';
 import { Toaster } from '@/components/ui/sonner';
+
+const fallbackSeoTitle = 'Elloani Ross Pitogo | Frontend Software Engineer';
+const fallbackSeoDescription =
+  'The portfolio website of Elloani Ross Pitogo, a Frontend Engineer currently based in The Philippines.';
+const fallbackFooterOwnerName = 'Elloani Ross Pitogo';
+const fallbackFooterRightsText = 'All rights reserved.';
+const fallbackNavigationLinks = [
+  { _key: 'about', label: 'About', href: '#about' },
+  { _key: 'skills', label: 'Skills', href: '#skills' },
+  { _key: 'projects', label: 'Projects', href: '#projects' },
+  { _key: 'contact', label: 'Contact', href: '#contact' },
+];
+
+const navigationSettings =
+  await sanityClient.fetch<NavigationSettingsQueryResult>(navigationSettingsQuery);
+const globalSeo = await sanityClient.fetch<GlobalSeoQueryResult>(globalSeoQuery);
+const footerSettings = await sanityClient.fetch<FooterSettingsQueryResult>(footerSettingsQuery);
+
+const navigationLinks = navigationSettings
+  ? navigationSettings.navigationLinks.filter((link) => link.isVisible !== false)
+  : fallbackNavigationLinks;
+const seoTitle = globalSeo?.seoTitle || fallbackSeoTitle;
+const seoDescription = globalSeo?.seoDescription || fallbackSeoDescription;
+const footerOwnerName = footerSettings?.footerOwnerName || fallbackFooterOwnerName;
+const footerRightsText = footerSettings?.footerRightsText || fallbackFooterRightsText;
 ---
 
 <!doctype html>
@@ -18,18 +50,19 @@ import { Toaster } from '@/components/ui/sonner';
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
-    <title>Elloani Ross Pitogo | Frontend Software Engineer</title>
-    <meta
-      name="description"
-      content="The portfolio website of Elloani Ross Pitogo, a Frontend Engineer currently based in The Philippines."
-    />
+    <title>{seoTitle}</title>
+    <meta name="description" content={seoDescription} />
     <Analytics />
     <SpeedInsights />
   </head>
   <body>
-    <Header />
+    <Header navigationLinks={navigationLinks} />
     <slot />
-    <Footer />
+    <Footer
+      navigationLinks={navigationLinks}
+      footerOwnerName={footerOwnerName}
+      footerRightsText={footerRightsText}
+    />
     <Toaster client:idle />
     {/* Portal target for mobile menu */}
     <div id="mobile-menu-root" class="fixed w-full top-19.5 left-0"></div>

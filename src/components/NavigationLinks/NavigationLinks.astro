@@ -1,43 +1,27 @@
 ---
 import { cn } from '@/lib/utils';
+import type { NavigationSettingsQueryResult } from '@/lib/sanity/queries';
 
-interface NavigationLink {
-  label: string;
-  href: string;
-}
+type NavigationLink = NonNullable<NavigationSettingsQueryResult>['navigationLinks'][number];
 
-const navigationLinks: NavigationLink[] = [
-  {
-    label: 'About',
-    href: '#about',
-  },
-  {
-    label: 'Skills',
-    href: '#skills',
-  },
-  {
-    label: 'Projects',
-    href: '#projects',
-  },
-  {
-    label: 'Contact',
-    href: '#contact',
-  },
-];
-
-const { class: className } = Astro.props;
+const { class: className, links = [] } = Astro.props as {
+  class?: string;
+  links?: NavigationLink[];
+};
 ---
 
-<nav class={cn(className)}>
-  <ul class="flex xs:gap-8 gap-6 xs:flex-row flex-col items-center">
-    {
-      navigationLinks.map(({ label, href }) => (
-        <li>
-          <a href={href} class="text-foreground hover:text-brand">
-            {label}
-          </a>
-        </li>
-      ))
-    }
-  </ul>
-</nav>
+{
+  links.length > 0 && (
+    <nav class={cn(className)}>
+      <ul class="flex xs:gap-8 gap-6 xs:flex-row flex-col items-center">
+        {links.map(({ label, href }) => (
+          <li>
+            <a href={href} class="text-foreground hover:text-brand">
+              {label}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+  )
+}

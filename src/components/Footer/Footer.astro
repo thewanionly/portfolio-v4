@@ -2,9 +2,22 @@
 import Socials from '../Socials.astro';
 import Logo from '../Logo.astro';
 import { cn } from '@/lib/utils';
+import type { NavigationSettingsQueryResult } from '@/lib/sanity/queries';
 import NavigationLinks from '../NavigationLinks';
 
 const currentYear = new Date().getFullYear();
+
+type NavigationLink = NonNullable<NavigationSettingsQueryResult>['navigationLinks'][number];
+
+const {
+  navigationLinks = [],
+  footerOwnerName,
+  footerRightsText,
+} = Astro.props as {
+  navigationLinks?: NavigationLink[];
+  footerOwnerName: string;
+  footerRightsText: string;
+};
 ---
 
 <footer class="bg-background-secondary">
@@ -25,7 +38,7 @@ const currentYear = new Date().getFullYear();
           'md:col-start-1 md:col-end-2 md:row-start-2 md:row-end-3'
         )}
       />
-      <NavigationLinks class="mb-13 md:mb-0 md:justify-self-end" />
+      <NavigationLinks class="mb-13 md:mb-0 md:justify-self-end" links={navigationLinks} />
       <p
         class={cn(
           'text-muted-foreground text-xs text-center',
@@ -33,7 +46,8 @@ const currentYear = new Date().getFullYear();
           'md:col-start-2 md:col-end-3 md:row-start-2 md:row-end-3'
         )}
       >
-        © {currentYear} Elloani Ross Pitogo. All rights reserved.
+        © {currentYear}
+        {footerOwnerName}. {footerRightsText}
       </p>
     </div>
   </div>

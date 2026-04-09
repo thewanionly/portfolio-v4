@@ -1,31 +1,44 @@
 ---
+import { sanityClient } from 'sanity:client';
+
 import { cn } from '@/lib/utils';
+
+import { contactSectionQuery } from '@/lib/sanity/queries';
+import type { ContactSectionQueryResult } from '@/lib/sanity/queries';
 import { ContactForm } from './ContactForm';
+
+const contactSection = await sanityClient.fetch<ContactSectionQueryResult>(contactSectionQuery);
 ---
 
-<section
-  id="contact"
-  class={cn('bg-background-secondary', 'scroll-mt-10 md:scroll-mt-15 lg:scroll-mt-20')}
->
-  <div
-    class="section-wrapper py-16 flex flex-col gap-12.5 items-center lg:flex-row lg:gap-30 max-w-md lg:items-start"
-  >
-    <div class="flex-1 max-w-lg">
-      <h2
-        class="text-4xl md:text-5xl lg:text-6xl text-center lg:text-start font-bold mb-10 lg:mb-15 xl:mb-20"
-      >
-        <a href="#contact">Contact</a>
-      </h2>
-      <p class="body-text text-center mx-auto lg:text-start lg:mx-0 mb-6 lg:mb-8">
-        I would love to hear about your project and how I could help. You can reach me through my
-        email: <a href="mailto:elloani.pitogo@gmail.com" class="text-brand hover:underline"
-          >elloani.pitogo@gmail.com</a
-        >.
-      </p>
-      <p class="body-text text-center mx-auto lg:text-start lg:mx-0 mb-6 lg:mb-8">
-        You can also fill in the form, and I’ll get back to you as soon as possible.
-      </p>
-    </div>
-    <ContactForm className="flex-1 max-w-lg w-full" client:idle />
-  </div>
-</section>
+{
+  contactSection && (
+    <section
+      id="contact"
+      class={cn('bg-background-secondary', 'scroll-mt-10 md:scroll-mt-15 lg:scroll-mt-20')}
+    >
+      <div class="section-wrapper py-16 flex flex-col gap-12.5 items-center lg:flex-row lg:gap-30 max-w-md lg:items-start">
+        <div class="flex-1 max-w-lg">
+          <h2 class="text-4xl md:text-5xl lg:text-6xl text-center lg:text-start font-bold mb-10 lg:mb-15 xl:mb-20">
+            <a href="#contact">{contactSection.title}</a>
+          </h2>
+          <p class="body-text text-center mx-auto lg:text-start lg:mx-0 mb-6 lg:mb-8">
+            {contactSection.introText}{' '}
+            <a href={`mailto:${contactSection.emailAddress}`} class="text-brand hover:underline">
+              {contactSection.emailAddress}
+            </a>
+            .
+          </p>
+          <p class="body-text text-center mx-auto lg:text-start lg:mx-0 mb-6 lg:mb-8">
+            {contactSection.formText}
+          </p>
+        </div>
+        <ContactForm
+          className="flex-1 max-w-lg w-full"
+          emailAddress={contactSection.emailAddress}
+          submitButtonLabel={contactSection.submitButtonLabel}
+          client:idle
+        />
+      </div>
+    </section>
+  )
+}

@@ -151,3 +151,137 @@ export const skillsSectionQuery = `
     }
   }
 `;
+
+export type ProjectsSectionQueryResult = {
+  _id: string;
+  _updatedAt: string;
+  title: string;
+  projects: Array<{
+    _key: string;
+    title: string;
+    isVisible?: boolean | null;
+    technologies: string[];
+    projectUrl: string;
+    sourceCodeUrl: string;
+    image?: {
+      alt?: string;
+      asset?: {
+        _id: string;
+        url: string;
+        metadata?: {
+          dimensions?: {
+            width?: number;
+            height?: number;
+            aspectRatio?: number;
+          };
+          lqip?: string;
+        };
+      };
+    } | null;
+  }>;
+} | null;
+
+export const projectsSectionQuery = `
+  *[_type == "projectsSection"] | order(_updatedAt desc)[0]{
+    _id,
+    _updatedAt,
+    title,
+    "projects": coalesce(projects, [])[]{
+      _key,
+      title,
+      isVisible,
+      technologies,
+      projectUrl,
+      sourceCodeUrl,
+      image{
+        alt,
+        asset->{
+          _id,
+          url,
+          metadata{
+            dimensions,
+            lqip
+          }
+        }
+      }
+    }
+  }
+`;
+
+export type ContactSectionQueryResult = {
+  _id: string;
+  _updatedAt: string;
+  title: string;
+  introText: string;
+  emailAddress: string;
+  formText: string;
+  submitButtonLabel: string;
+} | null;
+
+export const contactSectionQuery = `
+  *[_type == "contactSection"] | order(_updatedAt desc)[0]{
+    _id,
+    _updatedAt,
+    title,
+    introText,
+    emailAddress,
+    formText,
+    submitButtonLabel
+  }
+`;
+
+export type NavigationSettingsQueryResult = {
+  _id: string;
+  _updatedAt: string;
+  navigationLinks: Array<{
+    _key: string;
+    label: string;
+    href: string;
+    isVisible?: boolean | null;
+  }>;
+} | null;
+
+export const navigationSettingsQuery = `
+  *[_type == "navigationSettings"] | order(_updatedAt desc)[0]{
+    _id,
+    _updatedAt,
+    "navigationLinks": coalesce(navigationLinks, [])[]{
+      _key,
+      label,
+      href,
+      isVisible
+    }
+  }
+`;
+
+export type GlobalSeoQueryResult = {
+  _id: string;
+  _updatedAt: string;
+  seoTitle: string;
+  seoDescription: string;
+} | null;
+
+export const globalSeoQuery = `
+  *[_type == "globalSeo"] | order(_updatedAt desc)[0]{
+    _id,
+    _updatedAt,
+    seoTitle,
+    seoDescription
+  }
+`;
+
+export type FooterSettingsQueryResult = {
+  _id: string;
+  _updatedAt: string;
+  footerOwnerName: string;
+  footerRightsText: string;
+} | null;
+
+export const footerSettingsQuery = `
+  *[_type == "footerSettings"] | order(_updatedAt desc)[0]{
+    _id,
+    _updatedAt,
+    footerOwnerName,
+    footerRightsText
+  }
+`;
