@@ -44,6 +44,7 @@ export const ProjectCard = ({
           href={projectUrl}
           target="_blank"
           rel="noreferrer"
+          aria-label={`View project: ${title}`}
           className={cn(
             buttonVariants({ variant: 'default' }),
             'flex-1 md:text-base md:h-10 md:px-6'
@@ -55,6 +56,7 @@ export const ProjectCard = ({
           href={sourceCodeUrl}
           target="_blank"
           rel="noreferrer"
+          aria-label={`View code: ${title}`}
           className={cn(
             buttonVariants({ variant: 'outline' }),
             'flex-1 md:text-base md:h-10 md:px-6 '
