@@ -229,3 +229,59 @@ export const contactSectionQuery = `
     submitButtonLabel
   }
 `;
+
+export type NavigationSettingsQueryResult = {
+  _id: string;
+  _updatedAt: string;
+  navigationLinks: Array<{
+    _key: string;
+    label: string;
+    href: string;
+    isVisible?: boolean | null;
+  }>;
+} | null;
+
+export const navigationSettingsQuery = `
+  *[_type == "navigationSettings"] | order(_updatedAt desc)[0]{
+    _id,
+    _updatedAt,
+    "navigationLinks": coalesce(navigationLinks, [])[]{
+      _key,
+      label,
+      href,
+      isVisible
+    }
+  }
+`;
+
+export type GlobalSeoQueryResult = {
+  _id: string;
+  _updatedAt: string;
+  seoTitle: string;
+  seoDescription: string;
+} | null;
+
+export const globalSeoQuery = `
+  *[_type == "globalSeo"] | order(_updatedAt desc)[0]{
+    _id,
+    _updatedAt,
+    seoTitle,
+    seoDescription
+  }
+`;
+
+export type FooterSettingsQueryResult = {
+  _id: string;
+  _updatedAt: string;
+  footerOwnerName: string;
+  footerRightsText: string;
+} | null;
+
+export const footerSettingsQuery = `
+  *[_type == "footerSettings"] | order(_updatedAt desc)[0]{
+    _id,
+    _updatedAt,
+    footerOwnerName,
+    footerRightsText
+  }
+`;

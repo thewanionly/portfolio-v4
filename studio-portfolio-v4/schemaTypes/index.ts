@@ -3,6 +3,9 @@ import {aboutSectionType} from './aboutSection'
 import {skillsSectionType} from './skillsSection'
 import {projectsSectionType} from './projectsSection'
 import {contactSectionType} from './contactSection'
+import {navigationSettingsType} from './navigationSettings'
+import {globalSeoType} from './globalSeo'
+import {footerSettingsType} from './footerSettings'
 
 export const schemaTypes = [
   heroSectionType,
@@ -10,4 +13,7 @@ export const schemaTypes = [
   skillsSectionType,
   projectsSectionType,
   contactSectionType,
+  navigationSettingsType,
+  globalSeoType,
+  footerSettingsType,
 ]

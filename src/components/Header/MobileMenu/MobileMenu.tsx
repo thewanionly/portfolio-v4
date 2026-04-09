@@ -8,32 +8,11 @@ import {
   SheetTitle,
 } from '@/components/ui/sheet';
 import { useEffect, useState } from 'react';
+import type { NavigationSettingsQueryResult } from '@/lib/sanity/queries';
 
-interface NavigationLink {
-  label: string;
-  href: string;
-}
+type NavigationLink = NonNullable<NavigationSettingsQueryResult>['navigationLinks'][number];
 
-const navigationLinks: NavigationLink[] = [
-  {
-    label: 'About',
-    href: '#about',
-  },
-  {
-    label: 'Skills',
-    href: '#skills',
-  },
-  {
-    label: 'Projects',
-    href: '#projects',
-  },
-  {
-    label: 'Contact',
-    href: '#contact',
-  },
-];
-
-export const MobileMenu = () => {
+export const MobileMenu = ({ links }: { links: NavigationLink[] }) => {
   const { isOpen, toggleIsOpen } = useMobileMenuStore();
   const [mounted, setMounted] = useState(false);
 
@@ -58,9 +37,9 @@ export const MobileMenu = () => {
 
           <nav>
             <ul className="flex xs:gap-8 gap-6 xs:flex-row flex-col items-center">
-              {navigationLinks.map(({ label, href }) => (
+              {links.map(({ _key, label, href }) => (
                 <a
-                  key={label}
+                  key={_key}
                   href={href}
                   className="text-foreground hover:text-brand"
                   onClick={toggleIsOpen}
