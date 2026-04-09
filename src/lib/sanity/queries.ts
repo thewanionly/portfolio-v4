@@ -207,3 +207,25 @@ export const projectsSectionQuery = `
     }
   }
 `;
+
+export type ContactSectionQueryResult = {
+  _id: string;
+  _updatedAt: string;
+  title: string;
+  introText: string;
+  emailAddress: string;
+  formText: string;
+  submitButtonLabel: string;
+} | null;
+
+export const contactSectionQuery = `
+  *[_type == "contactSection"] | order(_updatedAt desc)[0]{
+    _id,
+    _updatedAt,
+    title,
+    introText,
+    emailAddress,
+    formText,
+    submitButtonLabel
+  }
+`;
