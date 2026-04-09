@@ -1,10 +1,6 @@
 ---
 import { sanityClient } from 'sanity:client';
 
-import { Image } from 'astro:assets';
-
-import swoop from '@/assets/swoop.svg';
-
 import { projectsSectionQuery } from '@/lib/sanity/queries';
 import type { ProjectsSectionQueryResult } from '@/lib/sanity/queries';
 import type { Project } from './ProjectsSection.types';
@@ -43,7 +39,20 @@ const projects: Project[] =
           <ProjectGrid projects={projects} client:visible />
         </div>
       </div>
-      <Image class="-mb-0.25 w-full mt-16" src={swoop} alt="" loading="eager" decoding="auto" />
+      <div class="-mb-0.25 mt-16 text-background-secondary">
+        <svg
+          class="h-auto w-full"
+          viewBox="0 0 1001 51"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+          aria-hidden="true"
+        >
+          <path
+            d="M276.335 23.0009C167.075 22.9529 0.5 50.5664 0.5 50.5664H1000.5C1000.5 50.5664 891.737 8.51346 812.228 1.78471C697.762 -7.90236 641.186 43.2892 525.612 45.6108C427.173 47.5882 374.831 23.0442 276.335 23.0009Z"
+            fill="currentColor"
+          />
+        </svg>
+      </div>
     </section>
   )
 }
