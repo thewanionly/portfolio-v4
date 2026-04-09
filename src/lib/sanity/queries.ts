@@ -151,3 +151,59 @@ export const skillsSectionQuery = `
     }
   }
 `;
+
+export type ProjectsSectionQueryResult = {
+  _id: string;
+  _updatedAt: string;
+  title: string;
+  projects: Array<{
+    _key: string;
+    title: string;
+    isVisible?: boolean | null;
+    technologies: string[];
+    projectUrl: string;
+    sourceCodeUrl: string;
+    image?: {
+      alt?: string;
+      asset?: {
+        _id: string;
+        url: string;
+        metadata?: {
+          dimensions?: {
+            width?: number;
+            height?: number;
+            aspectRatio?: number;
+          };
+          lqip?: string;
+        };
+      };
+    } | null;
+  }>;
+} | null;
+
+export const projectsSectionQuery = `
+  *[_type == "projectsSection"] | order(_updatedAt desc)[0]{
+    _id,
+    _updatedAt,
+    title,
+    "projects": coalesce(projects, [])[]{
+      _key,
+      title,
+      isVisible,
+      technologies,
+      projectUrl,
+      sourceCodeUrl,
+      image{
+        alt,
+        asset->{
+          _id,
+          url,
+          metadata{
+            dimensions,
+            lqip
+          }
+        }
+      }
+    }
+  }
+`;

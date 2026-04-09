@@ -24,6 +24,7 @@ export const ProjectCard = ({
         <a
           href={projectUrl}
           target="_blank"
+          rel="noreferrer"
           className={cn(
             buttonVariants({ variant: 'default' }),
             'flex-1 md:text-base md:h-10 md:px-6'
@@ -34,6 +35,7 @@ export const ProjectCard = ({
         <a
           href={sourceCodeUrl}
           target="_blank"
+          rel="noreferrer"
           className={cn(
             buttonVariants({ variant: 'outline' }),
             'flex-1 md:text-base md:h-10 md:px-6 '
