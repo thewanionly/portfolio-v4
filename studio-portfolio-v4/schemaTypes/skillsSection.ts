@@ -36,7 +36,6 @@ export const skillsSectionType = defineType({
               options: {
                 accept: 'image/svg+xml,image/*',
               },
-              validation: (Rule) => Rule.required(),
             }),
           ],
           preview: {
@@ -55,7 +54,7 @@ export const skillsSectionType = defineType({
           },
         }),
       ],
-      validation: (Rule) => Rule.required().min(1).max(24),
+      validation: (Rule) => Rule.required().min(1),
     }),
   ],
   preview: {

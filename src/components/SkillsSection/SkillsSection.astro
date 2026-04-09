@@ -5,32 +5,77 @@ import { skillsSectionQuery } from '@/lib/sanity/queries';
 import type { SkillsSectionQueryResult } from '@/lib/sanity/queries';
 
 const skillsSection = await sanityClient.fetch<SkillsSectionQueryResult>(skillsSectionQuery);
+const skills = skillsSection?.skills ?? [];
 ---
 
 {
-  skillsSection && (
-    <section id="skills" class="scroll-mt-10 md:scroll-mt-15 lg:scroll-mt-20">
-      <div class="section-wrapper py-16">
-        <h2 class="text-4xl md:text-5xl lg:text-6xl text-center md:text-start font-bold mb-10 md:mb-15 lg:mb-20">
+  skillsSection && skills.length > 0 && (
+    <section
+      id="skills"
+      class="relative overflow-hidden bg-background-secondary scroll-mt-10 md:scroll-mt-15 lg:scroll-mt-20"
+    >
+      <div class="pointer-events-none absolute -left-10 top-47 h-36 w-36 rounded-full bg-brand/35 blur-3xl" />
+      <div class="pointer-events-none absolute bottom-47 right-0 h-32 w-32 rounded-full bg-brand/20 blur-3xl" />
+
+      <div class="-mt-0.5 text-background">
+        <svg
+          class="h-auto w-full"
+          viewBox="0 0 1440 72"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+          aria-hidden="true"
+        >
+          <path
+            d="M0 40C142 24 255 12 374 12C522 12 632 34 756 34C884 34 990 10 1118 10C1236 10 1339 28 1440 24V0H0V40Z"
+            fill="currentColor"
+          />
+        </svg>
+      </div>
+
+      <div class="section-wrapper relative py-16">
+        <h2 class="text-4xl md:text-5xl lg:text-6xl text-center md:text-start font-bold mb-10 md:mb-15 lg:mb-20 text-balance">
           <a href="#skills">{skillsSection.title}</a>
         </h2>
-        <div class="grid 2xs:grid-cols-3 grid-cols-2 xs:grid-cols-4 sm:grid-cols-5 md:grid-cols-6 gap-x-4 gap-y-12.5">
-          {skillsSection.skills.map(({ label, icon }) => (
-            <div class="flex flex-col gap-3 items-center ">
-              {icon?.asset?.url && (
-                <img
-                  class="size-10 md:size-12.5 object-contain"
-                  src={icon.asset.url}
-                  alt=""
-                  aria-hidden="true"
-                  loading="lazy"
-                  decoding="async"
-                />
-              )}
-              <span class="text-lg text-center">{label}</span>
-            </div>
+
+        <ul class="flex flex-wrap justify-center gap-3 md:justify-start">
+          {skills.map(({ _key, label, icon }) => (
+            <li>
+              <div
+                class="flex min-h-14 items-center gap-3 rounded-2xl border border-border/70 bg-background/85 px-3 py-2.5 shadow-sm transition-transform duration-200 hover:-translate-y-0.5 hover:border-brand/60"
+                data-skill-key={_key}
+              >
+                {icon?.asset?.url && (
+                  <span class="flex size-9 shrink-0 items-center justify-center rounded-xl bg-background-secondary ring-1 ring-border/60">
+                    <img
+                      class="size-5 object-contain"
+                      src={icon.asset.url}
+                      alt=""
+                      aria-hidden="true"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  </span>
+                )}
+                <span class="text-sm font-medium text-foreground/90">{label}</span>
+              </div>
+            </li>
           ))}
-        </div>
+        </ul>
+      </div>
+
+      <div class="-mb-0.5 text-background">
+        <svg
+          class="h-auto w-full"
+          viewBox="0 0 1440 76"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+          aria-hidden="true"
+        >
+          <path
+            d="M0 18C132 34 248 54 384 54C525 54 633 28 758 28C890 28 1003 56 1129 56C1239 56 1345 38 1440 22V76H0V18Z"
+            fill="currentColor"
+          />
+        </svg>
       </div>
     </section>
   )

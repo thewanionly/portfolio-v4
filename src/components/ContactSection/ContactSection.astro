@@ -14,30 +14,41 @@ const contactSection = await sanityClient.fetch<ContactSectionQueryResult>(conta
   contactSection && (
     <section
       id="contact"
-      class={cn('bg-background-secondary', 'scroll-mt-10 md:scroll-mt-15 lg:scroll-mt-20')}
+      class={cn(
+        'relative -mt-0.5 overflow-hidden bg-background-secondary',
+        'scroll-mt-10 md:scroll-mt-15 lg:scroll-mt-20'
+      )}
     >
-      <div class="section-wrapper py-16 flex flex-col gap-12.5 items-center lg:flex-row lg:gap-30 max-w-md lg:items-start">
-        <div class="flex-1 max-w-lg">
-          <h2 class="text-4xl md:text-5xl lg:text-6xl text-center lg:text-start font-bold mb-10 lg:mb-15 xl:mb-20">
-            <a href="#contact">{contactSection.title}</a>
-          </h2>
-          <p class="body-text text-center mx-auto lg:text-start lg:mx-0 mb-6 lg:mb-8">
-            {contactSection.introText}{' '}
-            <a href={`mailto:${contactSection.emailAddress}`} class="text-brand hover:underline">
-              {contactSection.emailAddress}
-            </a>
-            .
-          </p>
-          <p class="body-text text-center mx-auto lg:text-start lg:mx-0 mb-6 lg:mb-8">
-            {contactSection.formText}
-          </p>
+      <div class="pointer-events-none absolute -left-10 top-43 h-36 w-36 rounded-full bg-brand/35 blur-3xl" />
+      <div class="pointer-events-none absolute bottom-40 right-0 h-32 w-32 rounded-full bg-brand/20 blur-3xl" />
+
+      <div class="section-wrapper relative py-16">
+        <div class="flex flex-col gap-12.5 items-center lg:flex-row lg:items-start lg:gap-30">
+          <div class="flex-1 max-w-lg">
+            <h2 class="text-4xl md:text-5xl lg:text-6xl text-center md:text-start font-bold mb-10 md:mb-15 lg:mb-20">
+              <a href="#contact">{contactSection.title}</a>
+            </h2>
+            <p class="body-text text-center mx-auto md:text-start md:mx-0 mb-6 lg:mb-8">
+              {contactSection.introText}{' '}
+              <a
+                href={`mailto:${contactSection.emailAddress}`}
+                class="font-semibold text-brand underline decoration-current decoration-2 underline-offset-4 focus-visible:rounded-sm focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand"
+              >
+                {contactSection.emailAddress}
+              </a>
+              .
+            </p>
+            <p class="body-text text-center mx-auto md:text-start md:mx-0 mb-6 lg:mb-8">
+              {contactSection.formText}
+            </p>
+          </div>
+          <ContactForm
+            className="flex-1 max-w-lg w-full"
+            emailAddress={contactSection.emailAddress}
+            submitButtonLabel={contactSection.submitButtonLabel}
+            client:idle
+          />
         </div>
-        <ContactForm
-          className="flex-1 max-w-lg w-full"
-          emailAddress={contactSection.emailAddress}
-          submitButtonLabel={contactSection.submitButtonLabel}
-          client:idle
-        />
       </div>
     </section>
   )

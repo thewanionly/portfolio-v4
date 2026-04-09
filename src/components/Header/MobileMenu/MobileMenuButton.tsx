@@ -6,7 +6,14 @@ export const MobileMenuButton = () => {
   const { isOpen, toggleIsOpen } = useMobileMenuStore();
 
   return (
-    <Button className="md:hidden" variant="ghost" size="icon" onClick={toggleIsOpen}>
+    <Button
+      className="md:hidden"
+      variant="ghost"
+      size="icon"
+      onClick={toggleIsOpen}
+      aria-expanded={isOpen}
+      aria-controls="mobile-navigation"
+    >
       {!isOpen ? <Menu className="size-5 md:size-6" /> : <X className="size-5 md:size-6" />}
       <span className="sr-only">{!isOpen ? 'Open' : 'Close'} menu</span>
     </Button>
