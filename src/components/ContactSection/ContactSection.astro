@@ -23,7 +23,10 @@ const contactSection = await sanityClient.fetch<ContactSectionQueryResult>(conta
           </h2>
           <p class="body-text text-center mx-auto lg:text-start lg:mx-0 mb-6 lg:mb-8">
             {contactSection.introText}{' '}
-            <a href={`mailto:${contactSection.emailAddress}`} class="text-brand hover:underline">
+            <a
+              href={`mailto:${contactSection.emailAddress}`}
+              class="font-semibold text-brand underline decoration-current decoration-2 underline-offset-4 focus-visible:rounded-sm focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand"
+            >
               {contactSection.emailAddress}
             </a>
             .

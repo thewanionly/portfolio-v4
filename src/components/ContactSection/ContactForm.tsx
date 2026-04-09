@@ -96,7 +96,10 @@ export const ContactForm = ({
       toast.error(
         <p>
           Oops, something went wrong. Please try again or you can{' '}
-          <a href={`mailto:${emailAddress}`} className="underline">
+          <a
+            href={`mailto:${emailAddress}`}
+            className="font-semibold text-brand underline decoration-current decoration-2 underline-offset-4 focus-visible:rounded-sm focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand"
+          >
             email me directly
           </a>{' '}
           instead.
