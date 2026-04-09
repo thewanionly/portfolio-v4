@@ -3,7 +3,6 @@ import {
   Sheet,
   SheetContent,
   SheetDescription,
-  SheetOverlay,
   SheetPortal,
   SheetTitle,
 } from '@/components/ui/sheet';
@@ -13,19 +12,33 @@ import type { NavigationSettingsQueryResult } from '@/lib/sanity/queries';
 type NavigationLink = NonNullable<NavigationSettingsQueryResult>['navigationLinks'][number];
 
 export const MobileMenu = ({ links }: { links: NavigationLink[] }) => {
-  const { isOpen, toggleIsOpen } = useMobileMenuStore();
+  const { isOpen, setIsOpen, closeMenu } = useMobileMenuStore();
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
     setMounted(true);
   }, []);
 
+  useEffect(() => {
+    const mediaQuery = window.matchMedia('(min-width: 768px)');
+    const handleBreakpointChange = (event: MediaQueryListEvent) => {
+      if (event.matches) closeMenu();
+    };
+
+    if (mediaQuery.matches) closeMenu();
+    mediaQuery.addEventListener('change', handleBreakpointChange);
+
+    return () => mediaQuery.removeEventListener('change', handleBreakpointChange);
+  }, [closeMenu]);
+
   const portalTarget = mounted ? document.getElementById('mobile-menu-root') : null;
 
   return (
-    <Sheet open={isOpen} onOpenChange={toggleIsOpen}>
+    <Sheet open={isOpen} onOpenChange={setIsOpen} modal={false}>
       <SheetPortal container={portalTarget}>
-        <SheetOverlay className="z-40 fixed h-dvh" />
+        {isOpen && (
+          <div aria-hidden="true" className="fixed inset-0 z-40 bg-black/70" onClick={closeMenu} />
+        )}
         <SheetContent
           side="top"
           showCloseButton={false}
@@ -35,14 +48,14 @@ export const MobileMenu = ({ links }: { links: NavigationLink[] }) => {
           <SheetTitle className="sr-only">Mobile Navigation</SheetTitle>
           <SheetDescription className="sr-only">Navigation links for mobile menu</SheetDescription>
 
-          <nav>
-            <ul className="flex xs:gap-8 gap-6 xs:flex-row flex-col items-center">
+          <nav id="mobile-navigation">
+            <ul className="flex flex-col items-center gap-6">
               {links.map(({ _key, label, href }) => (
                 <a
                   key={_key}
                   href={href}
                   className="text-foreground hover:text-brand"
-                  onClick={toggleIsOpen}
+                  onClick={closeMenu}
                 >
                   {label}
                 </a>
