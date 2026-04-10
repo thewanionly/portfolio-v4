@@ -1,5 +1,38 @@
 import {defineArrayMember, defineField, defineType} from 'sanity'
 
+const skillFields = [
+  defineField({
+    name: 'label',
+    title: 'Label',
+    type: 'string',
+    validation: (Rule) => Rule.required().max(40),
+  }),
+  defineField({
+    name: 'icon',
+    title: 'Icon',
+    type: 'file',
+    description: 'Upload the icon asset rendered for this skill. SVG works best.',
+    options: {
+      accept: 'image/svg+xml,image/*',
+    },
+  }),
+]
+
+const skillPreview = {
+  select: {
+    title: 'label',
+    media: 'icon',
+    icon: 'icon',
+  },
+  prepare({title, media, icon}: {title?: string; media?: unknown; icon?: unknown}) {
+    return {
+      title: title || 'Untitled skill',
+      subtitle: icon ? 'Icon uploaded' : 'No icon uploaded',
+      media,
+    }
+  },
+}
+
 export const skillsSectionType = defineType({
   name: 'skillsSection',
   title: 'Skills Section',
@@ -12,62 +45,80 @@ export const skillsSectionType = defineType({
       validation: (Rule) => Rule.required().max(80),
     }),
     defineField({
-      name: 'skills',
-      title: 'Skills',
+      name: 'categories',
+      title: 'Categories',
       type: 'array',
-      description: 'Items rendered in the skills grid on the homepage.',
+      description: 'Manage the four broad skill groups shown on the homepage.',
       of: [
         defineArrayMember({
-          name: 'skill',
-          title: 'Skill',
+          name: 'category',
+          title: 'Category',
           type: 'object',
           fields: [
             defineField({
-              name: 'label',
-              title: 'Label',
+              name: 'title',
+              title: 'Category Title',
               type: 'string',
-              validation: (Rule) => Rule.required().max(40),
+              validation: (Rule) => Rule.required().max(80),
             }),
             defineField({
-              name: 'icon',
-              title: 'Icon',
-              type: 'file',
-              description: 'Upload the icon asset rendered for this skill. SVG works best.',
-              options: {
-                accept: 'image/svg+xml,image/*',
-              },
+              name: 'skills',
+              title: 'Skills',
+              type: 'array',
+              description: 'Items rendered within this category on the homepage.',
+              of: [
+                defineArrayMember({
+                  name: 'skill',
+                  title: 'Skill',
+                  type: 'object',
+                  fields: skillFields,
+                  preview: skillPreview,
+                }),
+              ],
+              validation: (Rule) => Rule.required().min(1),
             }),
           ],
           preview: {
             select: {
-              title: 'label',
-              media: 'icon',
-              icon: 'icon',
+              title: 'title',
+              skills: 'skills',
             },
-            prepare({title, media, icon}) {
+            prepare({title, skills}: {title?: string; skills?: Array<unknown>}) {
+              const count = Array.isArray(skills) ? skills.length : 0
+
               return {
-                title: title || 'Untitled skill',
-                subtitle: icon ? 'Icon uploaded' : 'No icon uploaded',
-                media,
+                title: title || 'Untitled category',
+                subtitle: `${count} ${count === 1 ? 'skill' : 'skills'}`,
               }
             },
           },
         }),
       ],
-      validation: (Rule) => Rule.required().min(1),
+      validation: (Rule) =>
+        Rule.custom((categories) => {
+          if (categories == null) {
+            return true
+          }
+
+          if (!Array.isArray(categories) || categories.length !== 4) {
+            return 'Add exactly 4 categories.'
+          }
+
+          return true
+        }),
     }),
   ],
   preview: {
     select: {
       title: 'title',
-      skills: 'skills',
+      categories: 'categories',
     },
-    prepare({title, skills}) {
-      const count = Array.isArray(skills) ? skills.length : 0
+    prepare({title, categories}: {title?: string; categories?: Array<unknown>}) {
+      const categoryCount = Array.isArray(categories) ? categories.length : 0
 
       return {
         title: title || 'Skills Section',
-        subtitle: `${count} ${count === 1 ? 'skill' : 'skills'}`,
+        subtitle: `${categoryCount} ${categoryCount === 1 ? 'category' : 'categories'}`,
       }
     },
   },
