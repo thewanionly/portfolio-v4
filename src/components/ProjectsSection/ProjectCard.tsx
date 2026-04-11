@@ -27,7 +27,7 @@ export const ProjectCard = ({
           href={projectUrl}
           target="_blank"
           rel="noreferrer"
-          className="text-2xl font-bold leading-[1.3] transition-colors duration-200 hover:text-brand focus-visible:text-brand focus-visible:outline-none"
+          className="inline-flex rounded-sm text-2xl font-bold leading-[1.3] transition-colors duration-200 hover:text-brand focus-visible:text-brand focus-visible:underline focus-visible:decoration-2 focus-visible:underline-offset-4 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-brand/25 focus-visible:ring-offset-2 focus-visible:ring-offset-background"
         >
           {title}
         </a>

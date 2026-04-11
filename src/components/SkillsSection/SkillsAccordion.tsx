@@ -64,7 +64,7 @@ export const SkillsAccordion = ({ categories }: SkillsAccordionProps) => {
                 <div className="flex shrink-0 items-center">
                   <button
                     type="button"
-                    className="flex size-10 items-center justify-center rounded-full border border-border/70 bg-background/90 text-foreground/80 md:hidden"
+                    className="flex size-10 items-center justify-center rounded-full border border-border/70 bg-background/90 text-foreground/80 transition-colors focus-visible:outline-none focus-visible:border-brand focus-visible:ring-4 focus-visible:ring-brand/35 focus-visible:ring-offset-2 focus-visible:ring-offset-background md:hidden"
                     aria-expanded={isOpen}
                     aria-controls={contentId}
                     aria-label={`${isOpen ? 'Collapse' : 'Expand'} ${title}`}
@@ -115,7 +115,7 @@ export const SkillsAccordion = ({ categories }: SkillsAccordionProps) => {
                   {skills.map(({ _key: skillKey, label, icon }) => (
                     <li key={skillKey}>
                       <div
-                        className="flex min-h-14 items-center gap-3 rounded-2xl border border-border/70 bg-background/90 px-3 py-2.5 shadow-sm transition-transform duration-200 hover:-translate-y-0.5 hover:border-brand/60"
+                        className="flex min-h-14 items-center gap-3 rounded-2xl border border-border/70 bg-background/90 px-3 py-2.5 shadow-sm"
                         data-skill-key={skillKey}
                       >
                         {icon?.asset?.url && (
