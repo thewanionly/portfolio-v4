@@ -39,7 +39,7 @@ export const ProjectCard = ({
           </span>
         ))}
       </div>
-      <div className="flex gap-6 justify-between">
+      <div className="flex flex-col gap-3 xs:flex-row xs:gap-6 xs:justify-between">
         <a
           href={projectUrl}
           target="_blank"
@@ -47,7 +47,7 @@ export const ProjectCard = ({
           aria-label={`View project: ${title}`}
           className={cn(
             buttonVariants({ variant: 'default' }),
-            'flex-1 md:text-base md:h-10 md:px-6'
+            'w-full min-w-0 xs:flex-1 md:text-base md:h-10 md:px-6'
           )}
         >
           View Project
@@ -59,7 +59,7 @@ export const ProjectCard = ({
           aria-label={`View code: ${title}`}
           className={cn(
             buttonVariants({ variant: 'outline' }),
-            'flex-1 md:text-base md:h-10 md:px-6 '
+            'w-full min-w-0 xs:flex-1 md:text-base md:h-10 md:px-6'
           )}
         >
           View code

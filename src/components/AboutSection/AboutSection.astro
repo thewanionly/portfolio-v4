@@ -19,7 +19,7 @@ const aboutSection = await sanityClient.fetch<AboutSectionQueryResult>(aboutSect
             <div class="flex flex-col md:flex-row gap-6 items-center justify-between mx-auto md:mx-0">
               <p class="body-text text-center md:text-start">{entry.body}</p>
               {entry.illustration?.asset?.url && (
-                <div class="aspect-[2] max-w-[380px] min-w-[222px]">
+                <div class="aspect-[2] w-full max-w-[380px] min-w-0">
                   <img
                     class="w-full h-full object-contain"
                     src={entry.illustration.asset.url}
