@@ -1,11 +1,16 @@
 ---
-import { Image } from 'astro:assets';
-
-import logo from '@/assets/logo/ep-logo-dark.svg';
+import logoUrl from '@/assets/logo/ep-logo-dark.svg?url';
 
 const { class: className } = Astro.props;
 ---
 
 <a href="/#" class={className}>
-  <Image src={logo} alt="Elloani Ross's personal portfolio logo" loading="eager" decoding="auto" />
+  <img
+    src={logoUrl}
+    alt="Elloani Ross's personal portfolio logo"
+    width="70"
+    height="30"
+    loading="eager"
+    decoding="auto"
+  />
 </a>
