@@ -28,19 +28,19 @@ PUBLIC_SANITY_DATASET=
 Start the frontend locally:
 
 ```bash
-npm run dev
+pnpm run dev
 ```
 
 Build the frontend:
 
 ```bash
-npm run build
+pnpm run build
 ```
 
 Preview the production build locally:
 
 ```bash
-npm run preview
+pnpm run preview
 ```
 
 ## Sanity Studio setup

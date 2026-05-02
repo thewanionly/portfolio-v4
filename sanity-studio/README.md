@@ -23,13 +23,13 @@ Fill those values from your Sanity project settings. They are Studio configurati
 Install dependencies:
 
 ```bash
-npm install
+pnpm install
 ```
 
 Start the Studio:
 
 ```bash
-npm run dev
+pnpm run dev
 ```
 
 ## Deploying the Studio
@@ -44,7 +44,7 @@ Deploy the Studio after schema or Studio code changes, for example:
 Before deploying:
 
 1. make sure `.env.local` is present with the correct `SANITY_STUDIO_PROJECT_ID`, `SANITY_STUDIO_DATASET`, and `SANITY_STUDIO_APP_ID`
-2. install dependencies with `npm install`
+2. install dependencies with `pnpm install`
 3. log in to Sanity if needed
 
 If you are not authenticated yet:
@@ -56,8 +56,8 @@ npx sanity login
 Build and deploy:
 
 ```bash
-npm run build
-npm run deploy
+pnpm run build
+pnpm run deploy
 ```
 
 ## First deployment or app ID changes
@@ -68,7 +68,7 @@ This Studio uses the deployment configuration in `sanity.cli.ts`, including:
 deployment.appId = SANITY_STUDIO_APP_ID
 ```
 
-Set `SANITY_STUDIO_APP_ID` to the Studio app ID from your Sanity project before running `npm run deploy`. If the app ID changes, update the env value and redeploy.
+Set `SANITY_STUDIO_APP_ID` to the Studio app ID from your Sanity project before running `pnpm run deploy`. If the app ID changes, update the env value and redeploy.
 
 ## When to deploy
 
