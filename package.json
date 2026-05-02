@@ -6,9 +6,9 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "studio:dev": "npm --prefix ./studio-portfolio-v4 run dev",
-    "studio:build": "npm --prefix ./studio-portfolio-v4 run build",
-    "studio:deploy": "npm --prefix ./studio-portfolio-v4 run deploy",
+    "studio:dev": "pnpm --dir ./sanity-studio dev",
+    "studio:build": "pnpm --dir ./sanity-studio build",
+    "studio:deploy": "pnpm --dir ./sanity-studio deploy",
     "astro": "astro",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
@@ -82,5 +82,6 @@
     "commitizen": {
       "path": "./node_modules/cz-conventional-changelog"
     }
-  }
+  },
+  "packageManager": "pnpm@10.33.2+sha512.a90faf6feeab71ad6c6e57f94e0fe1a12f5dcc22cd754db40ae9593eb6a3e0b6b12e3540218bb37ae083404b1f2ce6db2a4121e979829b4aff94b99f49da1cf8"
 }

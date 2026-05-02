@@ -48,8 +48,8 @@ npm run preview
 Install dependencies for the Studio:
 
 ```bash
-cd studio-portfolio-v4
-npm install
+cd sanity-studio
+pnpm install
 ```
 
 Create a local env file for the Studio:
@@ -58,7 +58,7 @@ Create a local env file for the Studio:
 cp .env.example .env.local
 ```
 
-Sanity Studio reads these variables from `studio-portfolio-v4/.env.local`:
+Sanity Studio reads these variables from `sanity-studio/.env.local`:
 
 ```bash
 SANITY_STUDIO_PROJECT_ID=
@@ -71,13 +71,13 @@ Fill those values from your Sanity project settings before starting the Studio.
 Run the Studio locally from the Studio directory:
 
 ```bash
-npm run dev
+pnpm --dir ./sanity-studio dev
 ```
 
 Or run it from the project root:
 
 ```bash
-npm run studio:dev
+pnpm studio:dev
 ```
 
 ## Deploying Sanity Studio
@@ -91,32 +91,32 @@ Deploy the Studio when you change Studio code, such as:
 
 Before deploying:
 
-1. make sure `studio-portfolio-v4/.env.local` includes `SANITY_STUDIO_PROJECT_ID`, `SANITY_STUDIO_DATASET`, and `SANITY_STUDIO_APP_ID`
-2. install Studio dependencies with `npm install`
+1. make sure `sanity-studio/.env.local` includes `SANITY_STUDIO_PROJECT_ID`, `SANITY_STUDIO_DATASET`, and `SANITY_STUDIO_APP_ID`
+2. install dependencies with `pnpm install`
 3. log in to Sanity if needed
 
 From the repo root:
 
 ```bash
-npm run studio:build
-npm run studio:deploy
+pnpm studio:build
+pnpm studio:deploy
 ```
 
-Or from inside `studio-portfolio-v4`:
+Or from inside `sanity-studio`:
 
 ```bash
-npm run build
-npm run deploy
+pnpm build
+pnpm deploy
 ```
 
 If needed, log in first:
 
 ```bash
-cd studio-portfolio-v4
-npx sanity login
+cd sanity-studio
+pnpm sanity login
 ```
 
-The Studio deployment uses `SANITY_STUDIO_APP_ID` from `studio-portfolio-v4/.env.local`. If that app ID changes, update the env value and redeploy.
+The Studio deployment uses `SANITY_STUDIO_APP_ID` from `sanity-studio/.env.local`. If that app ID changes, update the env value and redeploy.
 
 ## Deploying the website
 

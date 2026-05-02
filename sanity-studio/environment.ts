@@ -1,7 +1,5 @@
 function missingEnv(name: string): never {
-  throw new Error(
-    `Missing ${name}. Add it to studio-portfolio-v4/.env.local or another Sanity env file.`,
-  )
+  throw new Error(`Missing ${name}. Add it to sanity-studio/.env.local or another Sanity env file.`)
 }
 
 export const sanityProjectId =
