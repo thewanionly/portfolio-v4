@@ -12,18 +12,68 @@ const { class: className, image } = Astro.props as {
 const portraitUrl = image?.asset?.url;
 const portraitAlt = image?.alt || 'Portrait of Elloani Pitogo seated at a table with hands clasped';
 const portraitWidth = image?.asset?.metadata?.dimensions?.width;
-const portraitHeight = image?.asset?.metadata?.dimensions?.height;
+const portraitLqip = image?.asset?.metadata?.lqip;
+
+const portraitTargetWidths = [160, 240, 320, 480, 640, 768, 960, 1280];
+const portraitCandidateWidths =
+  portraitWidth && portraitWidth < portraitTargetWidths[0]
+    ? [portraitWidth]
+    : portraitTargetWidths.filter((width) => !portraitWidth || width <= portraitWidth);
+const portraitFallbackWidth = portraitCandidateWidths.at(-1) ?? 960;
+const portraitSizes =
+  '(min-width: 768px) 320px, (min-width: 436px) 240px, (max-width: 291px) 160px, 55vw';
+
+const buildPortraitUrl = (url: string, width: number) => {
+  const imageUrl = new URL(url);
+
+  imageUrl.searchParams.set('w', String(width));
+  imageUrl.searchParams.set('h', String(width));
+  imageUrl.searchParams.set('fit', 'crop');
+  imageUrl.searchParams.set('auto', 'format');
+  imageUrl.searchParams.set('q', '90');
+
+  return imageUrl.toString();
+};
+
+const portraitSrc =
+  portraitUrl && portraitFallbackWidth
+    ? buildPortraitUrl(portraitUrl, portraitFallbackWidth)
+    : portraitUrl;
+const portraitSrcSet = portraitUrl
+  ? portraitCandidateWidths
+      .map((width) => `${buildPortraitUrl(portraitUrl, width)} ${width}w`)
+      .join(', ')
+  : undefined;
+const portraitPlaceholderStyle = portraitLqip
+  ? `background-image: url("${portraitLqip}"); background-size: cover; background-position: center; background-repeat: no-repeat;`
+  : undefined;
 ---
 
-<div class={cn('rounded-blob-shape w-[55%] min-w-[10rem] aspect-square', className)}>
+<div
+  class={cn(
+    'rounded-blob-shape relative w-[55%] min-w-[10rem] aspect-square overflow-hidden',
+    className
+  )}
+>
+  {
+    portraitLqip && (
+      <div
+        aria-hidden="true"
+        class="absolute inset-0 scale-110 blur-lg"
+        style={portraitPlaceholderStyle}
+      />
+    )
+  }
   {
     portraitUrl && (
       <img
-        class="rounded-blob-shape w-full aspect-square object-cover"
-        src={portraitUrl}
+        class="absolute inset-0 h-full w-full object-cover"
+        src={portraitSrc}
+        srcset={portraitSrcSet}
+        sizes={portraitSizes}
         alt={portraitAlt}
-        width={portraitWidth}
-        height={portraitHeight}
+        width={portraitFallbackWidth}
+        height={portraitFallbackWidth}
         loading="eager"
         decoding="async"
         fetchpriority="high"
