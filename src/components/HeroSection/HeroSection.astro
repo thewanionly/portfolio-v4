@@ -44,7 +44,7 @@ const heroSection = await sanityClient.fetch<HeroSectionQueryResult>(heroSection
         <CTAButtons buttons={heroSection.ctaButtons} />
       </div>
       <div class="hidden md:flex md:flex-col md:items-center">
-        <MyImage class="w-full max-w-xs mb-8" image={heroSection.portrait} />
+        <MyImage class="w-80 max-w-xs mb-8" image={heroSection.portrait} />
         <Socials links={heroSection.socialLinks} />
       </div>
     </section>
