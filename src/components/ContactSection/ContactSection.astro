@@ -46,7 +46,7 @@ const contactSection = await sanityClient.fetch<ContactSectionQueryResult>(conta
             className="flex-1 max-w-lg w-full"
             emailAddress={contactSection.emailAddress}
             submitButtonLabel={contactSection.submitButtonLabel}
-            client:idle
+            client:visible
           />
         </div>
       </div>
