@@ -18,6 +18,7 @@ const projects: Project[] =
       imgSrc: project.image?.asset?.url || '',
       imgAlt: project.image?.alt || `${project.title} screenshot`,
       title: project.title,
+      description: project.description?.trim(),
       technologies: project.technologies,
       projectUrl: project.projectUrl,
       sourceCodeUrl: project.sourceCodeUrl,

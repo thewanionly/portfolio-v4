@@ -3,6 +3,7 @@ export interface Project {
   imgSrc: string;
   imgAlt: string;
   title: string;
+  description?: string;
   technologies: string[];
   sourceCodeUrl: string;
   projectUrl: string;

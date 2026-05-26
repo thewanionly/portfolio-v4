@@ -167,6 +167,7 @@ export type ProjectsSectionQueryResult = {
   projects: Array<{
     _key: string;
     title: string;
+    description?: string | null;
     isVisible?: boolean | null;
     technologies: string[];
     projectUrl: string;
@@ -197,6 +198,7 @@ export const projectsSectionQuery = `
     "projects": coalesce(projects, [])[]{
       _key,
       title,
+      description,
       isVisible,
       technologies,
       projectUrl,

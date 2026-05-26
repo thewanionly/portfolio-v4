@@ -29,6 +29,15 @@ export const projectsSectionType = defineType({
               validation: (Rule) => Rule.required().max(80),
             }),
             defineField({
+              name: 'description',
+              title: 'Description',
+              type: 'text',
+              rows: 3,
+              description:
+                'Short portfolio-focused summary displayed under the project title. Keep it to 3 lines or less.',
+              validation: (Rule) => Rule.max(220),
+            }),
+            defineField({
               name: 'isVisible',
               title: 'Display Project',
               type: 'boolean',

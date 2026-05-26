@@ -3,7 +3,7 @@ import type { Project } from './ProjectsSection.types';
 import { buttonVariants } from '../ui/button';
 
 export const ProjectCard = ({
-  project: { imgSrc, imgAlt, title, technologies, projectUrl, sourceCodeUrl },
+  project: { imgSrc, imgAlt, title, description, technologies, projectUrl, sourceCodeUrl },
 }: {
   project: Project;
 }) => {
@@ -32,6 +32,11 @@ export const ProjectCard = ({
           {title}
         </a>
       </p>
+      {description && (
+        <p className="mb-5 line-clamp-3 text-sm leading-6 text-muted-foreground md:text-base md:leading-7">
+          {description}
+        </p>
+      )}
       <div className="flex flex-wrap gap-2 text-sm font-medium mb-8 text-grey-light">
         {technologies.map((tech) => (
           <span key={tech} className="px-2.5 py-1 rounded-full bg-grey-light/10">
