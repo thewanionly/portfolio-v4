@@ -8,7 +8,7 @@ export const ProjectCard = ({
   project: Project;
 }) => {
   return (
-    <div>
+    <div className="flex h-full flex-col">
       <a
         href={projectUrl}
         target="_blank"
@@ -22,29 +22,27 @@ export const ProjectCard = ({
           loading="lazy"
         />
       </a>
-      <p className="mb-4">
+      <p className="mb-2">
         <a
           href={projectUrl}
           target="_blank"
           rel="noreferrer"
-          className="inline-flex rounded-sm text-2xl font-bold leading-[1.3] transition-colors duration-200 hover:text-brand focus-visible:text-brand focus-visible:underline focus-visible:decoration-2 focus-visible:underline-offset-4 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-brand/25 focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+          className="line-clamp-2 rounded-sm text-2xl font-bold leading-[1.3] transition-colors duration-200 hover:text-brand focus-visible:text-brand focus-visible:underline focus-visible:decoration-2 focus-visible:underline-offset-4 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-brand/25 focus-visible:ring-offset-2 focus-visible:ring-offset-background"
         >
           {title}
         </a>
       </p>
-      {description && (
-        <p className="mb-5 line-clamp-3 text-sm leading-6 text-muted-foreground md:text-base md:leading-7">
-          {description}
-        </p>
-      )}
-      <div className="flex flex-wrap gap-2 text-sm font-medium mb-8 text-grey-light">
+      <p className="mb-5 min-h-24 line-clamp-4 text-sm leading-6 text-muted-foreground md:min-h-28 md:text-base md:leading-7">
+        {description}
+      </p>
+      <div className="mb-8 flex max-h-[6.25rem] flex-wrap gap-2 overflow-hidden text-sm font-medium leading-5 text-grey-light">
         {technologies.map((tech) => (
           <span key={tech} className="px-2.5 py-1 rounded-full bg-grey-light/10">
             {tech}
           </span>
         ))}
       </div>
-      <div className="flex flex-col gap-3 xs:flex-row xs:gap-6 xs:justify-between">
+      <div className="mt-auto flex flex-col gap-3 xs:flex-row xs:gap-6 xs:justify-between">
         <a
           href={projectUrl}
           target="_blank"
