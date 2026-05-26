@@ -161,6 +161,10 @@
   @apply max-w-[44ch] text-muted-foreground leading-[1.625] font-medium md:text-lg md:leading-[1.5];
 }
 
+.body-text-relaxed {
+  @apply leading-[1.65] md:leading-[1.6];
+}
+
 /* Custom Scrollbar styles */
 
 /* For Chrome, Edge, Safari */

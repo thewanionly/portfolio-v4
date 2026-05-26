@@ -11,13 +11,13 @@ const aboutSection = await sanityClient.fetch<AboutSectionQueryResult>(aboutSect
   aboutSection && (
     <section id="about" class="scroll-mt-10 md:scroll-mt-15 lg:scroll-mt-20">
       <div class="section-wrapper py-16">
-        <h2 class="text-4xl md:text-5xl lg:text-6xl text-center md:text-start font-bold mb-10 md:mb-15 lg:mb-20">
+        <h2 class="text-3xl md:text-4xl lg:text-5xl text-center md:text-start font-bold mb-10 md:mb-15 lg:mb-20">
           <a href="#about">{aboutSection.title}</a>
         </h2>
         <div class="flex flex-col gap-20 md:gap-15">
           {aboutSection.entries.map((entry) => (
             <div class="flex flex-col md:flex-row gap-6 items-center justify-between mx-auto md:mx-0">
-              <p class="body-text text-center md:text-start">{entry.body}</p>
+              <p class="body-text body-text-relaxed text-center md:text-start">{entry.body}</p>
               {entry.illustration?.asset?.url && (
                 <div class="aspect-[2] w-full max-w-[380px] min-w-0">
                   <img
