@@ -16,10 +16,12 @@ const aboutSection = await sanityClient.fetch<AboutSectionQueryResult>(aboutSect
         </h2>
         <div class="flex flex-col gap-20 md:gap-15">
           {aboutSection.entries.map((entry) => (
-            <div class="flex flex-col md:flex-row gap-6 items-center justify-between mx-auto md:mx-0">
-              <p class="body-text body-text-relaxed text-center md:text-start">{entry.body}</p>
+            <div class="flex flex-col md:flex-row gap-6 md:gap-10 items-center justify-between mx-auto md:mx-0">
+              <p class="body-text body-text-relaxed text-center md:text-start md:flex-1 md:min-w-0">
+                {entry.body}
+              </p>
               {entry.illustration?.asset?.url && (
-                <div class="aspect-[2] w-full max-w-[380px] min-w-0">
+                <div class="aspect-[2] w-full max-w-[380px] md:w-[clamp(17rem,34vw,23.75rem)] md:min-w-[17rem] md:shrink-0">
                   <img
                     class="w-full h-full object-contain"
                     src={entry.illustration.asset.url}
