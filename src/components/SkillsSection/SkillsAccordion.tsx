@@ -56,7 +56,7 @@ export const SkillsAccordion = ({ categories }: SkillsAccordionProps) => {
             data-category-key={_key}
           >
             <div className="md:flex md:items-start md:gap-6 lg:gap-7 xl:gap-8">
-              <div className="flex items-center justify-between gap-4 md:w-56 md:flex-none md:items-start lg:w-64 xl:w-72">
+              <div className="flex items-center justify-between gap-4 md:min-h-14 md:w-56 md:flex-none lg:w-64 xl:w-72">
                 <h3 className="text-lg font-semibold tracking-normal text-foreground md:text-xl">
                   {title}
                 </h3>
