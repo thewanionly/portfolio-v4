@@ -4,7 +4,7 @@ import logoUrl from '@/assets/logo/ep-logo-dark.svg?url';
 const { class: className } = Astro.props;
 ---
 
-<a href="/#" class={className}>
+<a href="/" class={className} data-scroll-top-logo>
   <img
     src={logoUrl}
     alt="Elloani Ross's personal portfolio logo"
@@ -14,3 +14,43 @@ const { class: className } = Astro.props;
     decoding="auto"
   />
 </a>
+
+<script>
+  const logoLinks = document.querySelectorAll<HTMLAnchorElement>('[data-scroll-top-logo]');
+
+  logoLinks.forEach((logoLink) => {
+    logoLink.addEventListener('click', (event) => {
+      if (
+        event.defaultPrevented ||
+        event.button !== 0 ||
+        event.metaKey ||
+        event.ctrlKey ||
+        event.shiftKey ||
+        event.altKey
+      ) {
+        return;
+      }
+
+      const targetUrl = new URL(logoLink.href);
+      const isSamePath =
+        targetUrl.origin === window.location.origin &&
+        targetUrl.pathname === window.location.pathname;
+
+      if (!isSamePath) {
+        return;
+      }
+
+      event.preventDefault();
+
+      if (window.location.hash) {
+        window.history.replaceState(
+          null,
+          '',
+          `${window.location.pathname}${window.location.search}`
+        );
+      }
+
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  });
+</script>
