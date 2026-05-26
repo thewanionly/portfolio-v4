@@ -42,7 +42,15 @@ export const MobileMenu = ({ links }: { links: NavigationLink[] }) => {
         <SheetContent
           side="top"
           showCloseButton={false}
-          className="backdrop-blur-md bg-background/80 p-6 pt-2 absolute"
+          className="backdrop-blur-md bg-background/80 px-6 pb-7 pt-3 absolute"
+          onInteractOutside={(event) => {
+            if (
+              event.target instanceof HTMLElement &&
+              event.target.closest('[data-mobile-menu-button]')
+            ) {
+              event.preventDefault();
+            }
+          }}
         >
           {/* Screen-reader-only title & description */}
           <SheetTitle className="sr-only">Mobile Navigation</SheetTitle>
@@ -54,7 +62,7 @@ export const MobileMenu = ({ links }: { links: NavigationLink[] }) => {
                 <a
                   key={_key}
                   href={href}
-                  className="text-foreground hover:text-brand"
+                  className="rounded-sm text-foreground hover:text-brand focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand"
                   onClick={closeMenu}
                 >
                   {label}

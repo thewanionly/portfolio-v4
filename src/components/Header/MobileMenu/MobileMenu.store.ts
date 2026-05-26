@@ -5,7 +5,6 @@ interface MobileMenuStore {
   isOpen: boolean;
   setIsOpen: (value: boolean) => void;
   closeMenu: () => void;
-  toggleIsOpen: () => void;
 }
 
 export const useMobileMenuStore = create<MobileMenuStore>()(
@@ -13,6 +12,5 @@ export const useMobileMenuStore = create<MobileMenuStore>()(
     isOpen: false,
     setIsOpen: (value) => set({ isOpen: value }),
     closeMenu: () => set({ isOpen: false }),
-    toggleIsOpen: () => set((state) => ({ isOpen: !state.isOpen })),
   }))
 );

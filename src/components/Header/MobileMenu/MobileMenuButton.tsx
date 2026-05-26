@@ -3,16 +3,18 @@ import { Button } from '../../ui/button';
 import { useMobileMenuStore } from './MobileMenu.store';
 
 export const MobileMenuButton = () => {
-  const { isOpen, toggleIsOpen } = useMobileMenuStore();
+  const { isOpen, setIsOpen } = useMobileMenuStore();
 
   return (
     <Button
-      className="relative md:hidden"
+      className="relative size-11 md:hidden"
       variant="ghost"
       size="icon"
-      onClick={toggleIsOpen}
+      type="button"
+      onClick={() => setIsOpen(!isOpen)}
       aria-expanded={isOpen}
       aria-controls="mobile-navigation"
+      data-mobile-menu-button
     >
       <span className="relative flex size-5 items-center justify-center md:size-6">
         <Menu
