@@ -4,6 +4,8 @@ A modern portfolio website built with Astro, React, TypeScript, Tailwind CSS, an
 
 ![Portfolio website preview](public/readme/portfolio-preview.png)
 
+View the live project [here](https://www.elloanipitogo.com/).
+
 ## Overview
 
 This repository contains the fourth version of my personal portfolio website. It is designed as a professional frontend showcase: performant, content-managed, responsive, accessible, and easy to maintain as different sections and content change over time.
