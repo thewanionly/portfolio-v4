@@ -21,14 +21,12 @@ const skillFields = [
 const skillPreview = {
   select: {
     title: 'label',
-    media: 'icon',
     icon: 'icon',
   },
-  prepare({title, media, icon}: {title?: string; media?: unknown; icon?: unknown}) {
+  prepare({title, icon}: {title?: string; icon?: unknown}) {
     return {
       title: title || 'Untitled skill',
       subtitle: icon ? 'Icon uploaded' : 'No icon uploaded',
-      media,
     }
   },
 }

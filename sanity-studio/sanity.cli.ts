@@ -6,12 +6,16 @@ export default defineCliConfig({
     projectId: sanityProjectId,
     dataset: sanityDataset,
   },
-  deployment: {
-    /**
-     * Enable auto-updates for studios.
-     * Learn more at https://www.sanity.io/docs/studio/latest-version-of-sanity#k47faf43faf56
-     */
-    appId: sanityAppId,
-    autoUpdates: true,
-  },
+  ...(sanityAppId
+    ? {
+        deployment: {
+          /**
+           * Optional Sanity-hosted Studio deployment config.
+           * Vercel deployments only need the build output from `sanity build`.
+           */
+          appId: sanityAppId,
+          autoUpdates: true,
+        },
+      }
+    : {}),
 })

@@ -2,7 +2,7 @@
 
 ## Environment setup
 
-Create a local env file before starting the Studio or deploying it:
+Create a local env file before starting the Studio:
 
 ```bash
 cp .env.example .env.local
@@ -13,7 +13,6 @@ Required variables:
 ```bash
 SANITY_STUDIO_PROJECT_ID=
 SANITY_STUDIO_DATASET=
-SANITY_STUDIO_APP_ID=
 ```
 
 Fill those values from your Sanity project settings. They are Studio configuration, not secrets, because Sanity exposes `SANITY_STUDIO_*` variables to the Studio bundle.
@@ -32,7 +31,15 @@ Start the Studio:
 pnpm run dev
 ```
 
-## Deploying the Studio
+Build the Studio:
+
+```bash
+pnpm run build
+```
+
+## Vercel Deployment
+
+This Studio is deployed through Vercel, so deployment is handled by Vercel from the build output instead of `sanity deploy`.
 
 Deploy the Studio after schema or Studio code changes, for example:
 
@@ -41,36 +48,28 @@ Deploy the Studio after schema or Studio code changes, for example:
 3. changing Studio configuration
 4. changing custom Studio code
 
-Before deploying:
-
-1. make sure `.env.local` is present with the correct `SANITY_STUDIO_PROJECT_ID`, `SANITY_STUDIO_DATASET`, and `SANITY_STUDIO_APP_ID`
-2. install dependencies with `pnpm install`
-3. log in to Sanity if needed
-
-If you are not authenticated yet:
+Use these Vercel settings when this folder is the Vercel project root:
 
 ```bash
-npx sanity login
+Build Command: pnpm build
+Output Directory: dist
 ```
 
-Build and deploy:
+Add these environment variables in Vercel:
 
 ```bash
-pnpm run build
-pnpm run deploy
+SANITY_STUDIO_PROJECT_ID=
+SANITY_STUDIO_DATASET=
 ```
 
-## First deployment or app ID changes
-
-This Studio uses the deployment configuration in `sanity.cli.ts`, including:
+If the Vercel project uses the repository root instead, use:
 
 ```bash
-deployment.appId = SANITY_STUDIO_APP_ID
+Build Command: pnpm studio:build
+Output Directory: sanity-studio/dist
 ```
 
-Set `SANITY_STUDIO_APP_ID` to the Studio app ID from your Sanity project before running `pnpm run deploy`. If the app ID changes, update the env value and redeploy.
-
-## When to deploy
+## When changes take effect
 
 Use this quick rule:
 
