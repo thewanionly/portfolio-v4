@@ -42,7 +42,24 @@ const heroSection = await sanityClient.fetch<HeroSectionQueryResult>(heroSection
           <MyImage class="max-w-[15rem] mx-auto mb-6" image={heroSection.portrait} />
         </div>
         <Socials class="md:hidden mb-7" links={heroSection.socialLinks} />
-        <p class="body-text body-text-relaxed mb-10 lg:mb-12">{heroSection.summary}</p>
+        <p class="body-text body-text-relaxed mb-3">{heroSection.summary}</p>
+        <p class="body-text body-text-relaxed mb-10 lg:mb-12 italic">
+          Learn more{' '}
+          <a
+            href="#about"
+            class="font-semibold text-brand underline decoration-current decoration-2 underline-offset-4 focus-visible:rounded-sm focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand"
+          >
+            about me
+          </a>{' '}
+          and the{' '}
+          <a
+            href="#skills"
+            class="font-semibold text-brand underline decoration-current decoration-2 underline-offset-4 focus-visible:rounded-sm focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand"
+          >
+            skills I bring
+          </a>
+          .
+        </p>
         <CTAButtons buttons={heroSection.ctaButtons} />
       </div>
       <div class="hidden md:flex md:flex-col md:items-center">
